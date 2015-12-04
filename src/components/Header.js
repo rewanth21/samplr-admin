@@ -1,27 +1,32 @@
-import React, { PropTypes, Component } from 'react'
-import TodoTextInput from './TodoTextInput'
+import React, { Component, propTypes } from 'react';
+import { Navbar, NavItem, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
-class Header extends Component {
-    handleSave(text) {
-        if (text.length !== 0) {
-            this.props.addTodo(text)
-        }
-    }
-
-    render() {
+export default class Header extends Component {
+    render () {
+        let { user, userLogout } = this.props;
         return (
-            <header className="header">
-                    <h1>todos</h1>
-                    <TodoTextInput newTodo
-                        onSave={this.handleSave.bind(this)}
-                        placeholder="What needs to be done?" />
-            </header>
+            <Navbar>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                      <a href="/">Samplr Admin</a>
+                    </Navbar.Brand>
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                        <NavItem eventKey={1} href="/">Dashboard</NavItem>
+                        <NavItem eventKey={2} href="/users">Users</NavItem>
+                    </Nav>
+                    <Nav pullRight>
+                        <Navbar.Text>
+                            Logged in as <b>{user.email}</b>
+                        </Navbar.Text>
+                        <NavItem onClick={userLogout.bind(null)} href="/">
+                            <b>Logout</b>
+                        </NavItem>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         )
     }
 }
-
-Header.propTypes = {
-    addTodo: PropTypes.func.isRequired
-}
-
-export default Header

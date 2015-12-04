@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class Dashboard {
+export default class Dashboard extends Component {
 
     render() {
-        const { tokenDeleted, user: { username } } = this.props;
+        const { user: { email } } = this.props;
 
         return (
-            <div>
-                <button onClick={tokenDeleted}>Log Out</button>
+            <div className="container">
+                Super secret dashboard here for <b>{email}</b>
             </div>
         );
     }

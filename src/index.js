@@ -11,7 +11,7 @@ import {
     pushState
 } from 'redux-router';
 
-import { Router, Route, Link } from 'react-router'
+import { Router, Route, IndexRoute, Link } from 'react-router'
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 
 import { devTools } from 'redux-devtools';
@@ -58,7 +58,7 @@ class Root extends Component {
                 <Provider store={store}>
                     <ReduxRouter history={createBrowserHistory()}>
                         <Route path='/' component={AppContainer}>
-                            <Route path='dashboard' component={DashboardContainer} />
+                            <IndexRoute component={DashboardContainer} />
                             <Route path='users' component={Users} />
                         </Route>
                         <Route path="*" component={NotFound}/>

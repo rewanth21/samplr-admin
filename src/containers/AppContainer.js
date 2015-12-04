@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, propTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../action-creators';
 import { connect } from 'react-redux';
 
 import LoginForm from '../components/LoginForm';
+import Header from '../components/Header';
 
 function select(state) {
     return {
@@ -11,6 +12,7 @@ function select(state) {
         loginForm: state.loginForm,
     };
 }
+
 
 class AppContainer extends Component {
     constructor(props) {
@@ -24,29 +26,18 @@ class AppContainer extends Component {
         const { dispatch, user, loginForm, children } = this.props;
 
         const headerBlock = user.authenticated ?
-            (<h1>Logged in as: {user.email}</h1>) :
-            (<h1>Please Log In</h1>);
+            <Header user={user} {...bindActionCreators(actionCreators, dispatch)} /> :
+            null;
 
         const contentBlock = user.authenticated ?
             (children) :
             (<LoginForm loginForm={loginForm} {...bindActionCreators(actionCreators, dispatch)} />);
 
         return (
-            <section style={{
-                width: '100%',
-                height: '100%',
-                margin: 'auto',
-                maxWidth: '980px',
-                textAlign: 'center',
-            }}>
-                <header style={{padding: '20px 0',}}>
-                    {headerBlock}
-                </header>
-
-                <section>
-                    {contentBlock}
-                </section>
-            </section>
+            <div>
+                {headerBlock}
+                {contentBlock}
+            </div>
         );
     }
 }

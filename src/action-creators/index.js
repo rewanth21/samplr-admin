@@ -112,3 +112,12 @@ export function userFetchFailed(data) {
         data,
     };
 }
+
+
+export function userLogout(data) {
+    Cookie.remove(authConstants.AUTH_COOKIE);
+    return {
+        type: constants.TOKEN_DELETED,
+        data,
+    };
+}

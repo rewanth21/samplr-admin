@@ -7,7 +7,6 @@ const initialState = {
 
 export default function loginForm (state = initialState, action = {}) {
 
-    console.log(type);
     const { data, type } = action;
 
     switch (type) {

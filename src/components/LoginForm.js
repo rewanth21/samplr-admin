@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
+import { Input, Button, Panel } from 'react-bootstrap';
+
 export default class LoginFormComponent extends Component {
 
     // horrible Babel bug:
@@ -26,17 +28,32 @@ export default class LoginFormComponent extends Component {
         const { loginForm: { username, isLoading } } = this.props;
 
         return (
-            <form onSubmit={this.handleFormSubmit}>
-                <label htmlFor='email'>Email</label>
-                <input type='text' id='email' defaultValue={username} ref='email' />
+            <div style={{
+                    margin: '100px auto',
+                    width: 500
+                }}>
+                <h1>Please Log In</h1>
+                <Panel>
+                    <form onSubmit={this.handleFormSubmit}>
+                        <Input type='text'
+                            id='email'
+                            defaultValue={username}
+                            label="Email"
+                            placeholder="Enter an email"/>
 
-                <label htmlFor='password'>Password</label>
-                <input type='password' id='password' ref='password' />
+                        <Input type='password'
+                            id='password'
+                            label="Password"
+                            placeholder="Enter your password" />
 
-                <input type='submit' style={{textAlign: 'right',}} disabled={isLoading} />
-
-                { isLoading ? <span>Loading...</span> : null }
-            </form>
+                        <Button type="submit"
+                            bsStyle="primary"
+                            disabled={isLoading}>
+                            { isLoading ? <span>Loading...</span> : <span>Log In</span> }
+                        </Button>
+                    </form>
+                </Panel>
+            </div>
         );
     }
 
