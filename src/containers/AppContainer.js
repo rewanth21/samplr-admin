@@ -24,7 +24,7 @@ class AppContainer extends Component {
         const { dispatch, user, loginForm, children } = this.props;
 
         const headerBlock = user.authenticated ?
-            (<h1>Logged in as: {user.username}</h1>) :
+            (<h1>Logged in as: {user.email}</h1>) :
             (<h1>Please Log In</h1>);
 
         const contentBlock = user.authenticated ?

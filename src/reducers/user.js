@@ -2,10 +2,10 @@ import * as authEvents from '../constants/AuthEvents';
 
 const initialState = {
     authenticated: false,
-    username: null
+    email: null
 };
 
-export default function (state = initialState, action = {}) {
+export default function user (state = initialState, action = {}) {
 
     const { data, type } = action;
 
@@ -14,7 +14,7 @@ export default function (state = initialState, action = {}) {
             return {
                 ...state,
                 authenticated: true,
-                username: data.username,
+                email: data.email,
             };
 
         case authEvents.TOKEN_DELETE_FAILED:

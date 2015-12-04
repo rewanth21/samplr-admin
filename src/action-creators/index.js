@@ -6,7 +6,7 @@ import Cookie from 'js-cookie';
 export function applicationLoaded(data) {
     console.log(authConstants.AUTH_COOKIE);
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log(token);
+    console.log('token:', token);
 
     // if the visitor doesn't have an auth token cookie,
     // show them a login page
@@ -57,10 +57,12 @@ export function loginSubmitted(data) {
             .post(API_ROOT + '/auth/login')
             .send(JSON.stringify(data))
             .end((err, res) => {
-                if (error) {
+                const { body } = res;
+
+                if (err) {
                     dispatch(loginFailed());
                 } else {
-                    Session.set(authConstants.AUTH_COOKIE, data.token);
+                    Cookie.set(authConstants.AUTH_COOKIE, body.token);
                     window.location.reload();
                 }
             });

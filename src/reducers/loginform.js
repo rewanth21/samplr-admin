@@ -5,8 +5,9 @@ const initialState = {
     isLoading: false,
 }
 
-export default function(state = initialState, action = {}) {
+export default function loginForm (state = initialState, action = {}) {
 
+    console.log(type);
     const { data, type } = action;
 
     switch (type) {

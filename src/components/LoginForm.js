@@ -1,6 +1,11 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class LoginFormComponent {
+export default class LoginFormComponent extends Component {
+
+    // horrible Babel bug:
+    constructor(props) {
+        super(props);
+    }
 
     static propTypes = {
         loginSubmitted: PropTypes.func.isRequired,
@@ -12,7 +17,7 @@ export default class LoginFormComponent {
         const { loginSubmitted } = this.props;
 
         loginSubmitted({
-            username: this.refs.username.value,
+            email: this.refs.email.value,
             password: this.refs.password.value,
         })
     }
@@ -22,8 +27,8 @@ export default class LoginFormComponent {
 
         return (
             <form onSubmit={this.handleFormSubmit}>
-                <label htmlFor='username'>Username</label>
-                <input type='username' id='username' defaultValue={username} ref='username' />
+                <label htmlFor='email'>Email</label>
+                <input type='text' id='email' defaultValue={username} ref='email' />
 
                 <label htmlFor='password'>Password</label>
                 <input type='password' id='password' ref='password' />

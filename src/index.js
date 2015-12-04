@@ -34,6 +34,8 @@ const reducer = combineReducers({
     ...reducers
 });
 
+console.log(reducers);
+
 function loggerMiddleware(next) {
     return next => action => {
         next(action);
@@ -45,6 +47,8 @@ const store = compose(
     reduxReactRouter({ createHistory }),
     devTools()
 )(createStore)(reducer);
+
+console.log(store.getState());
 
 
 class Root extends Component {
