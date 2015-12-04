@@ -3,6 +3,15 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var rewriteUrl = function(replacePath) {
+    return function(req, opt) {  // gets called with request and proxy object
+        var queryIndex = req.url.indexOf('?');
+        var query = queryIndex >= 0 ? req.url.substr(queryIndex) : "";
+        req.url = req.path.replace(opt.path, replacePath) + query;
+        //console.log("rewriting ", req.originalUrl, req.url);
+    };
+};
+
 module.exports = {
     devtool: 'source-map',
     entry: [
@@ -25,15 +34,18 @@ module.exports = {
             inject: 'body'
         }),
         new webpack.ProvidePlugin({
-           $: "jquery",
-           jQuery: "jquery"
+            $: "jquery",
+            jQuery: "jquery"
+        }),
+        new webpack.DefinePlugin({
+            'API_ROOT': 'http://samplr-api-dev.herokuapp.com'
         })
     ],
     module: {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: [ 'babel' ]
+                loaders: [ 'babel?stage=0' ]
             },
             // {
             //     test: /\.css?$/,
@@ -60,6 +72,7 @@ module.exports = {
         ]
     },
     devServer: {
+        contentBase: 'dist',
         historyApiFallback: true,
         port: 2000
     }

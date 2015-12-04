@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Redux TodoMVC example",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server",
+    "start": "./node_modules/.bin/webpack --color --watch & ./node_modules/.bin/webpack-dev-server",
+    "build": "./node_modules/.bin/webpack",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
@@ -19,13 +20,20 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
     "classnames": "^2.1.2",
+    "history": "^1.13.1",
     "jquery": "^2.1.4",
+    "js-cookie": "^2.0.4",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
-    "redux": "^3.0.0"
+    "react-router": "^1.0.0",
+    "redux": "^3.0.0",
+    "redux-react-router": "^0.4.0",
+    "superagent": "^1.5.0",
+    "superagent-defaults": "^0.1.14"
   },
   "devDependencies": {
+    "babel": "^5.8.34",
     "babel-core": "^5.6.18",
     "babel-loader": "^5.1.4",
     "babel-plugin-react-transform": "^1.1.0",
