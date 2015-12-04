@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../action-creators';
 import { connect } from 'react-redux';
@@ -12,23 +12,24 @@ function select(state) {
     };
 }
 
-class AppContainer {
-
+class AppContainer extends Component {
     constructor(props) {
-            const { dispatch } = props;
-            dispatch(actionCreators.applicationLoaded());
+        super();
+        const { dispatch } = props;
+        dispatch(actionCreators.applicationLoaded());
     }
 
     render() {
+        console.log(this.props);
         const { dispatch, user, loginForm, children } = this.props;
 
         const headerBlock = user.authenticated ?
-            <h1>Logged in as: {user.username}</h1> :
-            <h1>Please Log In</h1>;
+            (<h1>Logged in as: {user.username}</h1>) :
+            (<h1>Please Log In</h1>);
 
         const contentBlock = user.authenticated ?
-            children :
-            <LoginForm loginForm={loginForm} {...bindActionCreators(actionCreators, dispatch)} />;
+            (children) :
+            (<LoginForm loginForm={loginForm} {...bindActionCreators(actionCreators, dispatch)} />);
 
         return (
             <section style={{

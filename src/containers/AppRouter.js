@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Router, Route, Redirect } from 'react-router';
 import { reduxRouteComponent } from 'redux-react-router';
 import { store } from '../index.js';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
+import { ReduxRouter } from 'redux-router';
 
 import AppContainer from './AppContainer';
 import DashboardContainer from './DashboardContainer';
@@ -10,19 +11,16 @@ import Users from './Users';
 import NotFound from './NotFound'
 
 
-export default class AppRouter {
+export default class AppRouter extends Component {
     render() {
         return(
-            <Router history={createBrowserHistory()}>
-                <Redirect from='/' to='/dashboard' />
-                <Route component={reduxRouteComponent(store)}>
-                    <Route path='/' component={AppContainer}>
-                        <Route path='dashboard' component={DashboardContainer} />
-                        <Route path='users' component={Users} />
-                    </Route>
-                    <Route path="*" component={NotFound}/>
+            <ReduxRouter history={createBrowserHistory()}>
+                <Route path='/' component={AppContainer}>
+                    <Route path='dashboard' component={DashboardContainer} />
+                    <Route path='users' component={Users} />
                 </Route>
-            </Router>
+                <Route path="*" component={NotFound}/>
+            </ReduxRouter>
         );
     }
 }

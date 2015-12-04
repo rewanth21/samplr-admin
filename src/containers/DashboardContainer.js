@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action-creators';
 import Dashboard from '../components/dashboard';
 
 function select(state) {
-  return {
-    user: state.user,
-  };
+    return {
+        user: state.user,
+    };
 }
 
-class HomeContainer {
+class HomeContainer extends Component{
 
-  render() {
-    const { dispatch, user } = this.props;
+    render() {
+        const { dispatch, user } = this.props;
 
-    return (
-      <Dashboard user={user} {...bindActionCreators(actionCreators, dispatch)} />
-    );
-  }
+        return (
+            <Dashboard user={user} {...bindActionCreators(actionCreators, dispatch)} />
+        );
+    }
 
 }
 

@@ -1,18 +1,22 @@
 import * as constants from '../constants/AuthEvents';
-import * as auth from '../constants/Auth';
+import * as authConstants from '../constants/Auth';
 import request from '../utils/request';
 import Cookie from 'js-cookie';
 
 export function applicationLoaded(data) {
-    const token = Cookie.get(auth.COOKIE_NAME);
+    console.log(authConstants.AUTH_COOKIE);
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+    console.log(token);
 
     // if the visitor doesn't have an auth token cookie,
     // show them a login page
     if (!token) {
+        console.log('No token!');
         return dispatch => {
             dispatch(userFetchFailed())
         }
     }
+    console.log(data);
 
     // otherwise, verify that it's correct
     return dispatch => {
@@ -22,7 +26,7 @@ export function applicationLoaded(data) {
         });
 
         return request
-            .set(auth.AUTH_HEADER, token)
+            .set(authConstants.AUTH_HEADER, token)
             .get(API_ROOT + '/me')
             .end((err, res={}) => {
                 const { body } = res;
@@ -56,7 +60,7 @@ export function loginSubmitted(data) {
                 if (error) {
                     dispatch(loginFailed());
                 } else {
-                    Session.set(auth.COOKIE_NAME, data.token);
+                    Session.set(authConstants.AUTH_COOKIE, data.token);
                     window.location.reload();
                 }
             });
@@ -72,7 +76,7 @@ export function loginFailed(data) {
 
 export function userFetched(data) {
     // at this point, we can assume that the cookie exists and is valid
-    const token = Cookie.get(auth.COOKIE_NAME);
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
         dispatch({
@@ -81,7 +85,7 @@ export function userFetched(data) {
         });
 
         return request
-            .set(auth.AUTH_HEADER, token)
+            .set(authConstants.AUTH_HEADER, token)
             .get(API_ROOT + '/me')
             .end((err, res={}) => {
                 const { body } = res;

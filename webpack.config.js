@@ -38,13 +38,14 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.DefinePlugin({
-            'API_ROOT': 'http://samplr-api-dev.herokuapp.com'
+            'API_ROOT': JSON.stringify('http://samplr-api-dev.herokuapp.com')
         })
     ],
     module: {
         loaders: [
             {
                 test: /\.js$/,
+                exclude: /node_modules/,
                 loader: 'babel',
                 query: {
                     cacheDirectory: true,
