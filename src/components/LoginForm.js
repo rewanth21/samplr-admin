@@ -13,14 +13,15 @@ export default class LoginFormComponent extends Component {
         loginSubmitted: PropTypes.func.isRequired,
     }
 
+
     handleFormSubmit = (e) => {
         e.preventDefault();
 
         const { loginSubmitted } = this.props;
 
         loginSubmitted({
-            email: this.refs.email.value,
-            password: this.refs.password.value,
+            email: this.refs.email.getValue(),
+            password: this.refs.password.getValue(),
         })
     }
 
@@ -37,12 +38,14 @@ export default class LoginFormComponent extends Component {
                     <form onSubmit={this.handleFormSubmit}>
                         <Input type='text'
                             id='email'
+                            ref="email"
                             defaultValue={username}
                             label="Email"
                             placeholder="Enter an email"/>
 
                         <Input type='password'
                             id='password'
+                            ref="password"
                             label="Password"
                             placeholder="Enter your password" />
 
