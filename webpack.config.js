@@ -45,7 +45,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: [ 'babel?stage=0' ]
+                loader: 'babel',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', 'react', 'stage-0']
+                }
             },
             // {
             //     test: /\.css?$/,
