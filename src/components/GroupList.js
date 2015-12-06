@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Table, Button } from 'react-bootstrap';
 
 export default class GroupList extends Component {
 
@@ -12,20 +13,53 @@ export default class GroupList extends Component {
 
         if (groups.isLoading) {
             return (
-                <div className="container">Loading groups...</div>
+                <p>Loading groups...</p>
             );
         }
 
         if (groups.list.length === 0) {
             return (
-                <div className="container">You have no groups.</div>
+                <p>You have no groups.</p>
             );
         }
 
         return (
-            <div className="container">
-                You have {groups.list.length} groups!
-            </div>
+            <Table striped bordered condensed hover>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {groups.list.map((group, index) => {
+                        return (
+                            <tr>
+                                <td>{index + 1}</td>
+                                <td>{group.name}</td>
+                                <td>{group.created}</td>
+                                <td>
+                                    <ButtonToolbar>
+                                        <ButtonGroup bsSize="xsmall">
+                                            <Button>Create Survey</Button>
+                                            <Button>Edit Name</Button>
+                                        </ButtonGroup>
+                                    </ButtonToolbar>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colSpan="4">
+                            You have <b>{groups.list.length}</b> groups
+                        </td>
+                    </tr>
+                </tfoot>
+            </Table>
         );
     }
 

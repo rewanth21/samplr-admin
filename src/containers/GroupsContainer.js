@@ -16,7 +16,7 @@ class GroupsContainer extends Component {
         const { dispatch, user, groups } = this.props;
 
         return (
-            <div>
+            <div className="container">
                 <GroupList user={user} groups={groups} {...bindActionCreators(actionCreators, dispatch)} />
             </div>
         )

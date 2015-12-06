@@ -19,6 +19,7 @@ import configureStore from './store/configureStore'
 import AppContainer from './containers/AppContainer';
 import DashboardContainer from './containers/DashboardContainer';
 import GroupsContainer from './containers/GroupsContainer';
+import CreateGroupsContainer from './containers/CreateGroupsContainer';
 import Users from './containers/Users';
 import NotFound from './containers/NotFound'
 
@@ -55,6 +56,7 @@ class Root extends Component {
                         <Route path='/' component={AppContainer}>
                             <IndexRoute component={DashboardContainer} />
                             <Route path="groups" component={GroupsContainer} />
+                            <Route path="groups/create" component={CreateGroupsContainer} />
                             <Route path='users' component={Users} />
                         </Route>
                         <Route path="*" component={NotFound}/>
