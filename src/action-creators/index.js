@@ -159,6 +159,42 @@ export function userGetGroupsSucceeded (data) {
     };
 }
 
+export function getGroup (groupId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+    console.log('get group');
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_GROUP,
+            groupId,
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/group/'+groupId)
+            .end((err, res={}) => {
+                const { body } = res;
+
+                err ?
+                    dispatch(getGroupFailed()) :
+                    dispatch(getGroupSucceeded(body));
+            });
+    };
+}
+
+export function getGroupFailed () {
+    return {
+        type: apiConstants.GET_GROUP_FAILED
+    };
+}
+
+export function getGroupSucceeded (data) {
+    return {
+        type: apiConstants.GET_GROUP_SUCCEEDED,
+        data,
+    };
+}
+
 export function createGroup (data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
