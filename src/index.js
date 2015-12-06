@@ -41,8 +41,6 @@ const store = compose(
     devTools()
 )(createStore)(reducer);
 
-console.log(store.getState());
-
 let history = createBrowserHistory();
 
 syncReduxAndRouter(history, store);

@@ -1,4 +1,5 @@
 import * as constants from '../constants/AuthEvents';
+import * as apiConstants from '../constants/APIEvents';
 import * as authConstants from '../constants/Auth';
 import request from '../utils/request';
 import Cookie from 'js-cookie';
@@ -15,7 +16,6 @@ export function applicationLoaded(data) {
             dispatch(userFetchFailed())
         }
     }
-    console.log(data);
 
     // otherwise, verify that it's correct
     return dispatch => {
@@ -63,7 +63,7 @@ export function loginSubmitted(data) {
                 } else {
                     Cookie.set(authConstants.AUTH_COOKIE, body.token);
                     window.location.reload();
-                    //dispatch(updatePath('/groups'));
+                    //dispatch(updatePath('/'));
                 }
             });
     };
@@ -118,6 +118,43 @@ export function userLogout(data) {
     Cookie.remove(authConstants.AUTH_COOKIE);
     return {
         type: constants.TOKEN_DELETED,
+        data,
+    };
+}
+
+
+export function userGetGroups (userId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+    console.log('get groups');
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_GROUPS,
+            userId,
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/user/'+userId+'/group')
+            .end((err, res={}) => {
+                const { body } = res;
+
+                err ?
+                    dispatch(userGetGroupsFailed()) :
+                    dispatch(userGetGroupsSucceeded(body));
+            });
+    };
+}
+
+export function userGetGroupsFailed () {
+    return {
+        type: apiConstants.GET_GROUPS_FAILED
+    };
+}
+
+export function userGetGroupsSucceeded (data) {
+    return {
+        type: apiConstants.GET_GROUPS_SUCCEEDED,
         data,
     };
 }

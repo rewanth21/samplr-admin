@@ -19,7 +19,6 @@ class AppContainer extends Component {
     constructor(props) {
         super();
         const { dispatch } = props;
-        console.log(this.props, this.context);
         dispatch(actionCreators.applicationLoaded());
     }
 

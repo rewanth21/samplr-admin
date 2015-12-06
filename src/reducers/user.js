@@ -15,12 +15,14 @@ export default function user (state = initialState, action = {}) {
                 ...state,
                 authenticated: true,
                 email: data.email,
+                userId: data.id
             };
 
         case authEvents.TOKEN_DELETE_FAILED:
             return {
                 ...state,
                 authenticated: false,
+                userId: null
             };
 
         default:
