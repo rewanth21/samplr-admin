@@ -41,7 +41,9 @@ export default class SurveyList extends Component {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    {survey.name}
+                                    <Link to={'/group/'+groupId+'/survey/'+survey.id}>
+                                        {survey.name}
+                                    </Link>
                                 </td>
                                 <td>{survey.created}</td>
                                 <td>

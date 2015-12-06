@@ -44,6 +44,7 @@ class GroupsSurveysPage extends Component {
                         </Button>
                     </LinkContainer>
                 </h1>
+                <p>Click on a survey name to view its questions and responses.</p>
                 <SurveyList groupId={id} surveys={surveys}
                     {...bindActionCreators(actionCreators, dispatch)} />
             </div>

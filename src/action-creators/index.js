@@ -406,7 +406,7 @@ export function getSurveySucceeded (data) {
 }
 
 
-// GET SURVEY
+// GET SURVEY QUESTIONS
 export function getSurveyQuestions (surveyId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
@@ -440,6 +440,44 @@ export function getSurveyQuestionsFailed (data) {
 export function getSurveyQuestionsSucceeded (data) {
     return {
         type: apiConstants.GET_SURVEY_QUESTIONS_SUCCEEDED,
+        data,
+    };
+}
+
+// GET SURVEY RESPONSES
+export function getSurveyResponses (surveyId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_SURVEY_RESPONSES,
+            surveyId
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/survey/'+surveyId+'/response')
+            .end((err, res={}) => {
+                const { body } = res;
+                if (err) {
+                    dispatch(getSurveyResponsesFailed())
+                } else {
+                    dispatch(getSurveyResponsesSucceeded(body));
+                }
+            });
+    };
+}
+
+export function getSurveyResponsesFailed (data) {
+    return {
+        type: apiConstants.GET_SURVEY_RESPONSES_FAILED,
+        data
+    };
+}
+
+export function getSurveyResponsesSucceeded (data) {
+    return {
+        type: apiConstants.GET_SURVEY_RESPONSES_SUCCEEDED,
         data,
     };
 }
