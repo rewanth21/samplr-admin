@@ -9,6 +9,10 @@ export default class LoginFormComponent extends Component {
         super(props);
     }
 
+    static contextTypes = {
+        history: PropTypes.object
+    };
+
     static propTypes = {
         loginSubmitted: PropTypes.func.isRequired,
     }
@@ -21,8 +25,8 @@ export default class LoginFormComponent extends Component {
 
         loginSubmitted({
             email: this.refs.email.getValue(),
-            password: this.refs.password.getValue(),
-        })
+            password: this.refs.password.getValue()
+        });
     }
 
     render() {

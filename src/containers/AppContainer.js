@@ -1,4 +1,4 @@
-import React, { Component, propTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../action-creators';
 import { connect } from 'react-redux';
@@ -15,14 +15,15 @@ function select(state) {
 
 
 class AppContainer extends Component {
+
     constructor(props) {
         super();
         const { dispatch } = props;
+        console.log(this.props, this.context);
         dispatch(actionCreators.applicationLoaded());
     }
 
     render() {
-        console.log(this.props);
         const { dispatch, user, loginForm, children } = this.props;
 
         const headerBlock = user.authenticated ?

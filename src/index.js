@@ -4,12 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 import * as reducers from './reducers';
 
-import {
-    ReduxRouter,
-    routerStateReducer,
-    reduxReactRouter,
-    pushState
-} from 'redux-router';
+import { syncReduxAndRouter, routeReducer } from 'redux-simple-router'
 
 import { Router, Route, IndexRoute, Link } from 'react-router'
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
@@ -23,18 +18,17 @@ import configureStore from './store/configureStore'
 
 import AppContainer from './containers/AppContainer';
 import DashboardContainer from './containers/DashboardContainer';
+import GroupsContainer from './containers/GroupsContainer';
 import Users from './containers/Users';
 import NotFound from './containers/NotFound'
 
 import thunkMiddleware from 'redux-thunk';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
-const reducer = combineReducers({
-    router: routerStateReducer,
-    ...reducers
-});
+const reducer = combineReducers(Object.assign({}, reducers, {
+    routing: routeReducer
+}))
 
-console.log(reducers);
 
 function loggerMiddleware(next) {
     return next => action => {
@@ -44,11 +38,14 @@ function loggerMiddleware(next) {
 
 const store = compose(
     applyMiddleware(thunkMiddleware, loggerMiddleware),
-    reduxReactRouter({ createHistory }),
     devTools()
 )(createStore)(reducer);
 
 console.log(store.getState());
+
+let history = createBrowserHistory();
+
+syncReduxAndRouter(history, store);
 
 
 class Root extends Component {
@@ -56,16 +53,17 @@ class Root extends Component {
         return (
             <div>
                 <Provider store={store}>
-                    <ReduxRouter history={createBrowserHistory()}>
+                    <Router history={history}>
                         <Route path='/' component={AppContainer}>
                             <IndexRoute component={DashboardContainer} />
+                            <Route path="groups" component={GroupsContainer} />
                             <Route path='users' component={Users} />
                         </Route>
                         <Route path="*" component={NotFound}/>
-                    </ReduxRouter>
+                    </Router>
                 </Provider>
                 <DebugPanel top right bottom>
-                    <DevTools store={store} monitor={LogMonitor} />
+                    <DevTools store={store} monitor={LogMonitor} visibleOnLoad={false} />
                 </DebugPanel>
             </div>
         );

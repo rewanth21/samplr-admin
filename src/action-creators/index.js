@@ -2,11 +2,10 @@ import * as constants from '../constants/AuthEvents';
 import * as authConstants from '../constants/Auth';
 import request from '../utils/request';
 import Cookie from 'js-cookie';
+import { updatePath } from 'redux-simple-router'
 
 export function applicationLoaded(data) {
-    console.log(authConstants.AUTH_COOKIE);
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log('token:', token);
 
     // if the visitor doesn't have an auth token cookie,
     // show them a login page
@@ -64,6 +63,7 @@ export function loginSubmitted(data) {
                 } else {
                     Cookie.set(authConstants.AUTH_COOKIE, body.token);
                     window.location.reload();
+                    //dispatch(updatePath('/groups'));
                 }
             });
     };

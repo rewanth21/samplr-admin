@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //import LoginForm from '../components/LoginForm'
 
-class Public extends Component {
+class GroupsContainer extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ class Public extends Component {
     }
 }
 
-export default Public
+export default GroupsContainer
