@@ -332,7 +332,7 @@ export function createSurvey (data) {
     return dispatch => {
         dispatch({
             type: apiConstants.CREATE_SURVEY,
-            researcherId
+            data
         });
 
         return request
@@ -346,6 +346,7 @@ export function createSurvey (data) {
                     dispatch(createSurveyFailed())
                 } else {
                     dispatch(createSurveySucceeded(body));
+                    dispatch(updatePath('/group/'+data.groupId));
                 }
             });
     };

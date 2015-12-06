@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as ENUMS from '../constants/Enums';
 import { Input, Button } from 'react-bootstrap';
 import CheckBoxList from 'react-checkbox-list';
+import _ from 'lodash';
 
 export default class CreateGroupForm extends Component {
 
@@ -23,12 +24,20 @@ export default class CreateGroupForm extends Component {
         e.preventDefault();
 
         const { createSurvey } = this.props;
-        console.log(this.refs.schedule);
 
-        // createSurvey({
-        //     name: this.refs.name.getValue(),
-        //     groupId: this.props.groupId
-        // });
+        createSurvey({
+            name: this.refs.name.getValue(),
+            groupId: this.props.groupId,
+            schedule: this.props.createSurveyForm.schedule
+        });
+    }
+
+    saveList (values) {
+        this.props.createSurveyForm.schedule = _.map(values, (x) => {
+            return {
+                time: x
+            }
+        });
     }
 
     render() {
@@ -51,7 +60,9 @@ export default class CreateGroupForm extends Component {
                     placeholder="Please enter a name for this survey"/>
 
                 <b>Schedule</b><br />
-                <CheckBoxList data={ENUMS.SURVEY_TIMES} ref="schedule"/>
+                <CheckBoxList defaultData={ENUMS.SURVEY_TIMES}
+                    onChange={this.saveList.bind(this)}
+                    ref="schedule"/>
 
                 <Button type="submit"
                     bsStyle="primary"

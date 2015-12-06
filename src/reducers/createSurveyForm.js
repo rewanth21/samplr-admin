@@ -20,12 +20,15 @@ export default function createSurveyForm (state = initialState, action = {}) {
             };
 
         case APIEvents.CREATE_SURVEY_SUCCEEDED:
-            return initialState;
+            return {
+                ...state,
+                isLoading: false
+            }
 
         case APIEvents.CREATE_SURVEY_FAILED:
             return {
                 ...state,
-                isLoading: false,
+                isLoading: false
             };
 
         default:

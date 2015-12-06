@@ -1,7 +1,7 @@
 export const SURVEY_TIMES = [
-    { name: 'SUNRISE', label: 'Sunrise' },
-    { name: 'MORNING', label: 'Morning' },
-    { name: 'NOON', label: 'Noon' },
-    { name: 'SUNSET', label: 'Sunset' },
-    { name: 'NIGHT', label: 'Night' }
+    { value: 'SUNRISE', label: 'Sunrise' },
+    { value: 'MORNING', label: 'Morning' },
+    { value: 'NOON', label: 'Noon' },
+    { value: 'SUNSET', label: 'Sunset' },
+    { value: 'NIGHT', label: 'Night' }
 ];
