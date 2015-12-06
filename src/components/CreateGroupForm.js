@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Input, Button, Panel } from 'react-bootstrap';
+import { Input, Button } from 'react-bootstrap';
 
 export default class CreateGroupForm extends Component {
 
@@ -32,25 +32,20 @@ export default class CreateGroupForm extends Component {
         const { createGroupForm: { name, isLoading } } = this.props;
 
         return (
-            <div className="container">
-                <h1>Create a new user group</h1>
-                <Panel>
-                    <form onSubmit={this.handleFormSubmit}>
-                        <Input type='text'
-                            id='name'
-                            ref="name"
-                            defaultValue={name}
-                            label="Group name"
-                            placeholder="Please enter a name for this group"/>
+            <form onSubmit={this.handleFormSubmit}>
+                <Input type='text'
+                    id='name'
+                    ref="name"
+                    defaultValue={name}
+                    label="Group name"
+                    placeholder="Please enter a name for this group"/>
 
-                        <Button type="submit"
-                            bsStyle="primary"
-                            disabled={isLoading}>
-                            { isLoading ? <span>Loading...</span> : <span>Create Group</span> }
-                        </Button>
-                    </form>
-                </Panel>
-            </div>
+                <Button type="submit"
+                    bsStyle="primary"
+                    disabled={isLoading}>
+                    { isLoading ? <span>Loading...</span> : <span>Create Group</span> }
+                </Button>
+            </form>
         );
     }
 

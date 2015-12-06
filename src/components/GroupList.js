@@ -40,7 +40,7 @@ export default class GroupList extends Component {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    <Link to={'groups/'+group.id}>
+                                    <Link to={'group/'+group.id}>
                                         {group.name}
                                     </Link>
                                 </td>

@@ -5,6 +5,8 @@ import request from '../utils/request';
 import Cookie from 'js-cookie';
 import { updatePath } from 'redux-simple-router'
 
+// AUTH actions
+
 export function applicationLoaded(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
@@ -122,6 +124,7 @@ export function userLogout(data) {
     };
 }
 
+// GROUPS
 
 export function userGetGroups (userId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
@@ -159,6 +162,9 @@ export function userGetGroupsSucceeded (data) {
     };
 }
 
+
+// GET GROUP
+
 export function getGroup (groupId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
     console.log('get group');
@@ -194,6 +200,9 @@ export function getGroupSucceeded (data) {
         data,
     };
 }
+
+
+// CREATE GROUP
 
 export function createGroup (data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
@@ -235,6 +244,8 @@ export function createGroupSucceeded (data) {
     };
 }
 
+// SURVEYS
+
 export function getGroupSurveys (groupId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
@@ -273,6 +284,7 @@ export function getGroupSurveysSucceeded (data) {
     };
 }
 
+// USERS
 
 export function getUsers (researcherId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
@@ -308,6 +320,47 @@ export function getUsersFailed (data) {
 export function getUsersSucceeded (data) {
     return {
         type: apiConstants.GET_USERS_SUCCEEDED,
+        data,
+    };
+}
+
+
+// CREATE SURVEY
+export function createSurvey (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.CREATE_SURVEY,
+            researcherId
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .post(API_ROOT + '/survey')
+            .send(JSON.stringify(data))
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(createSurveyFailed())
+                } else {
+                    dispatch(createSurveySucceeded(body));
+                }
+            });
+    };
+}
+
+export function createSurveyFailed (data) {
+    return {
+        type: apiConstants.CREATE_SURVEY_FAILED,
+        data
+    };
+}
+
+export function createSurveySucceeded (data) {
+    return {
+        type: apiConstants.CREATE_SURVEY_SUCCEEDED,
         data,
     };
 }

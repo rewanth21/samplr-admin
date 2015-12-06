@@ -4,7 +4,7 @@ import * as actionCreators from '../action-creators';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { Panel, Breadcrumb, BreadcrumbItem } from 'react-bootstrap';
+import { Panel, Breadcrumb, BreadcrumbItem, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 function select(state) {
@@ -27,7 +27,7 @@ class GroupsSurveysPage extends Component {
         return (
             <div>
                 <Breadcrumb>
-                    <LinkContainer to="groups">
+                    <LinkContainer to="/groups">
                         <BreadcrumbItem>
                             Groups
                         </BreadcrumbItem>
@@ -36,7 +36,14 @@ class GroupsSurveysPage extends Component {
                         {group.item.name}
                     </BreadcrumbItem>
                 </Breadcrumb>
-                <h1>Surveys in group <i>{group.item.name}</i></h1>
+                <h1>
+                    Surveys in group <i>{group.item.name}</i>
+                    <LinkContainer to={'/create-survey/'+id}>
+                        <Button className="pull-right" bsStyle="primary">
+                            Create New Survey
+                        </Button>
+                    </LinkContainer>
+                </h1>
                 <SurveyList groupId={id} surveys={surveys}
                     {...bindActionCreators(actionCreators, dispatch)} />
             </div>
