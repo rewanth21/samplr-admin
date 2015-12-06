@@ -346,7 +346,7 @@ export function createSurvey (data) {
                     dispatch(createSurveyFailed())
                 } else {
                     dispatch(createSurveySucceeded(body));
-                    dispatch(updatePath('/group/'+data.groupId));
+                    dispatch(updatePath('group/'+data.groupId+'/survey/'+data.id+'/add'));
                 }
             });
     };
@@ -362,6 +362,46 @@ export function createSurveyFailed (data) {
 export function createSurveySucceeded (data) {
     return {
         type: apiConstants.CREATE_SURVEY_SUCCEEDED,
+        data,
+    };
+}
+
+
+// GET SURVEY
+export function getSurvey (surveyId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_SURVEY,
+            surveyId
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/survey/'+surveyId)
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(getSurveyFailed())
+                } else {
+                    dispatch(getSurveySucceeded(body));
+                }
+            });
+    };
+}
+
+export function getSurveyFailed (data) {
+    return {
+        type: apiConstants.GET_SURVEY_FAILED,
+        data
+    };
+}
+
+export function getSurveySucceeded (data) {
+    return {
+        type: apiConstants.GET_SURVEY_SUCCEEDED,
         data,
     };
 }

@@ -67,7 +67,7 @@ export default class CreateGroupForm extends Component {
                 <Button type="submit"
                     bsStyle="primary"
                     disabled={isLoading}>
-                    { isLoading ? <span>Loading...</span> : <span>Create Survey</span> }
+                    { isLoading ? <span>Loading...</span> : <span>Continue</span> }
                 </Button>
             </form>
         );

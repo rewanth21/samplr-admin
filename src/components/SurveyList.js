@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { Table, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
 
-export default class GroupList extends Component {
+export default class SurveyList extends Component {
 
     componentWillMount () {
         this.props.getGroupSurveys(this.props.groupId);
@@ -10,7 +11,7 @@ export default class GroupList extends Component {
 
 
     render() {
-        const { user, surveys } = this.props;
+        const { user, surveys, groupId } = this.props;
 
         if (surveys.isLoading) {
             return (
@@ -46,7 +47,9 @@ export default class GroupList extends Component {
                                 <td>
                                     <ButtonToolbar>
                                         <ButtonGroup bsSize="xsmall">
-                                            <Button>Update</Button>
+                                            <LinkContainer to={'/group/'+groupId+'/survey/'+survey.id+'/add'}>
+                                                <Button>Add Questions</Button>
+                                            </LinkContainer>
                                         </ButtonGroup>
                                     </ButtonToolbar>
                                 </td>
