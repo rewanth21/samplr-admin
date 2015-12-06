@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import GroupList from '../components/GroupList';
+import SurveyList from '../components/SurveyList';
 import * as actionCreators from '../action-creators';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -8,13 +8,14 @@ import { Panel } from 'react-bootstrap';
 
 function select(state) {
     return {
-        groups: state.groups
+        groups: state.groups,
+        surveys: state.surveys
     };
 }
 
 class GroupSurveysContainer extends Component {
     render() {
-        const { dispatch, groups } = this.props;
+        const { dispatch, groups, surveys } = this.props;
         const groupId = this.props.routeParams.id
         const group = _.findWhere(groups.list, { id: groupId});
         console.log(group);
@@ -22,7 +23,9 @@ class GroupSurveysContainer extends Component {
         return (
             <div className="container">
                 <Panel>
-                    <h1>Surveys in group <i>{group}</i></h1>
+                    <h1>Surveys in group <i>{groupId}</i></h1>
+                    <SurveyList groupId={groupId} surveys={surveys}
+                        {...bindActionCreators(actionCreators, dispatch)} />
                 </Panel>
             </div>
         )

@@ -161,7 +161,6 @@ export function userGetGroupsSucceeded (data) {
 
 export function createGroup (data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log('get groups');
 
     return dispatch => {
         dispatch({
@@ -196,6 +195,44 @@ export function createGroupFailed (data) {
 export function createGroupSucceeded (data) {
     return {
         type: apiConstants.CREATE_GROUP_SUCCEEDED,
+        data,
+    };
+}
+
+export function getGroupSurveys (groupId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_GROUP_SURVEYS,
+            groupId
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/group/'+groupId+'/survey')
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(getGroupSurveysFailed())
+                } else {
+                    dispatch(getGroupSurveysSucceeded(body));
+                }
+            });
+    };
+}
+
+export function getGroupSurveysFailed (data) {
+    return {
+        type: apiConstants.GET_GROUP_SURVEYS_FAILED,
+        data
+    };
+}
+
+export function getGroupSurveysSucceeded (data) {
+    return {
+        type: apiConstants.GET_GROUP_SURVEYS_SUCCEEDED,
         data,
     };
 }
