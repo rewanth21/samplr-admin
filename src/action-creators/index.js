@@ -272,3 +272,42 @@ export function getGroupSurveysSucceeded (data) {
         data,
     };
 }
+
+
+export function getUsers (researcherId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_USERS,
+            researcherId
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/user/'+researcherId+'/user')
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(getUsersFailed())
+                } else {
+                    dispatch(getUsersSucceeded(body));
+                }
+            });
+    };
+}
+
+export function getUsersFailed (data) {
+    return {
+        type: apiConstants.GET_USERS_FAILED,
+        data
+    };
+}
+
+export function getUsersSucceeded (data) {
+    return {
+        type: apiConstants.GET_USERS_SUCCEEDED,
+        data,
+    };
+}

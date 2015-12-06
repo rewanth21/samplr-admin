@@ -21,7 +21,7 @@ import DashboardContainer from './containers/DashboardContainer';
 import GroupsContainer from './containers/GroupsContainer';
 import GroupSurveysContainer from './containers/GroupSurveysContainer';
 import CreateGroupsContainer from './containers/CreateGroupsContainer';
-import Users from './containers/Users';
+import UsersContainer from './containers/UsersContainer';
 import NotFound from './containers/NotFound'
 
 import thunkMiddleware from 'redux-thunk';
@@ -59,7 +59,7 @@ class Root extends Component {
                             <Route path="groups" component={GroupsContainer} />
                             <Route path="groups/:id" component={GroupSurveysContainer} />
                             <Route path="groups/create" component={CreateGroupsContainer} />
-                            <Route path='users' component={Users} />
+                            <Route path='users' component={UsersContainer} />
                         </Route>
                         <Route path="*" component={NotFound}/>
                     </Router>
