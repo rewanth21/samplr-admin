@@ -24,6 +24,7 @@
     "history": "^1.13.1",
     "jquery": "^2.1.4",
     "js-cookie": "^2.0.4",
+    "lodash": "^3.10.1",
     "react": "^0.14.0",
     "react-bootstrap": "^0.28.1",
     "react-dom": "^0.14.0",

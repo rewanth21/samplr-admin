@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { Table, Button } from 'react-bootstrap';
+import { Table, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 export default class GroupList extends Component {
 
@@ -24,7 +25,7 @@ export default class GroupList extends Component {
         }
 
         return (
-            <Table striped bordered condensed hover>
+            <Table striped bordered condensed>
                 <thead>
                     <tr>
                         <th>#</th>
@@ -36,9 +37,13 @@ export default class GroupList extends Component {
                 <tbody>
                     {groups.list.map((group, index) => {
                         return (
-                            <tr>
+                            <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td>{group.name}</td>
+                                <td>
+                                    <Link to={'groups/'+group.id}>
+                                        {group.name}
+                                    </Link>
+                                </td>
                                 <td>{group.created}</td>
                                 <td>
                                     <ButtonToolbar>
