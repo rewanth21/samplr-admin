@@ -28,9 +28,11 @@ import NotFound from './containers/NotFound'
 
 import thunkMiddleware from 'redux-thunk';
 import createBrowserHistory from 'history/lib/createBrowserHistory'
+import {reducer as formReducer} from 'redux-form';
 
 const reducer = combineReducers(Object.assign({}, reducers, {
-    routing: routeReducer
+    routing: routeReducer,
+    form: formReducer
 }))
 
 
@@ -61,7 +63,7 @@ class Root extends Component {
                             <Route path="groups" component={GroupsContainer} />
                             <Route path="groups/create" component={CreateGroupsContainer} />
                             <Route path="create-survey/:id" component={CreateSurveyContainer} />
-                            <Route path="group/:groupId/survey/:surveyId/add" component={AddSurveyQuestionsContainer} />
+                            <Route path="group/:groupId/survey/:surveyId/add-questions" component={AddSurveyQuestionsContainer} />
                             <Route path="group/:id" component={GroupSurveysContainer} />
                             <Route path='users' component={UsersContainer} />
                         </Route>

@@ -47,7 +47,7 @@ export default class SurveyList extends Component {
                                 <td>
                                     <ButtonToolbar>
                                         <ButtonGroup bsSize="xsmall">
-                                            <LinkContainer to={'/group/'+groupId+'/survey/'+survey.id+'/add'}>
+                                            <LinkContainer to={'/group/'+groupId+'/survey/'+survey.id+'/add-questions'}>
                                                 <Button>Add Questions</Button>
                                             </LinkContainer>
                                         </ButtonGroup>

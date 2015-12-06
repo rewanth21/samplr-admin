@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import CreateSurveyForm from '../components/CreateSurveyForm';
 import * as actionCreators from '../action-creators';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -7,10 +6,14 @@ import { updatePath } from 'redux-simple-router'
 import { Panel, Breadcrumb, BreadcrumbItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
+import SurveyQuestionsForm from '../components/SurveyQuestionsForm';
+import SurveyQuestionsList from '../components/SurveyQuestionsList';
+
 function select(state) {
     return {
         group: state.group,
-        survey: state.survey
+        survey: state.survey,
+        addSurveyQuestionsForm: state.addSurveyQuestionsForm
     };
 }
 
@@ -21,7 +24,13 @@ class AddSurveyQuestionsPage extends Component {
     }
 
     render (){
-        const { addSurveyQuestionForm, group, survey, dispatch } = this.props;
+        const {
+            addSurveyQuestionsForm,
+            group,
+            survey,
+            dispatch,
+            surveyId
+        } = this.props;
 
         if (group.isLoading || survey.isLoading) {
             return (<span>Loading...</span>);
@@ -46,7 +55,14 @@ class AddSurveyQuestionsPage extends Component {
                 </Breadcrumb>
 
                 <h1>Add Survey Questions</h1>
-                <SurveyQuestionsForm addSurveyQuestionForm={addSurveyQuestionForm}
+                <SurveyQuestionsList
+                    surveyId={surveyId}
+                    survey={survey}
+                    {...bindActionCreators(actionCreators, dispatch)} />
+                <hr />
+                <SurveyQuestionsForm
+                    addSurveyQuestionsForm={addSurveyQuestionsForm}
+                    surveyId={surveyId}
                     groupId={this.props.groupId}
                     {...bindActionCreators(actionCreators, dispatch)} />
             </Panel>
@@ -57,7 +73,7 @@ class AddSurveyQuestionsPage extends Component {
 class AddSurveyQuestionsContainer extends Component {
 
     render() {
-        const { group, survey, dispatch } = this.props;
+        const { addSurveyQuestionsForm, group, survey, dispatch } = this.props;
 
         return (
             <div className="container">
@@ -65,6 +81,7 @@ class AddSurveyQuestionsContainer extends Component {
                     groupId={this.props.routeParams.groupId}
                     surveyId={this.props.routeParams.surveyId}
                     group={group}
+                    addSurveyQuestionsForm={addSurveyQuestionsForm}
                     survey={survey}
                     dispatch={dispatch}
                     {...bindActionCreators(actionCreators, dispatch)} />
