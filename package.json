@@ -1,7 +1,10 @@
 {
   "name": "samplr-admin",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Redux TodoMVC example",
+  "engines": {
+    "node": "4.2.3"
+  },
   "scripts": {
     "start": "./node_modules/.bin/webpack --color --watch & ./node_modules/.bin/webpack-dev-server",
     "build": "./node_modules/.bin/webpack",
@@ -20,6 +23,7 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
     "classnames": "^2.1.2",
+    "express": "4.13.3",
     "deep-equal": "^1.0.1",
     "history": "^1.13.1",
     "jquery": "^2.1.4",
