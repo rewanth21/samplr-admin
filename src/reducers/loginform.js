@@ -3,7 +3,7 @@ import * as authEvents from '../constants/AuthEvents';
 const initialState = {
     username: '',
     isLoading: false,
-}
+};
 
 export default function loginForm (state = initialState, action = {}) {
 
