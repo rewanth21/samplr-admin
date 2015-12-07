@@ -8,18 +8,6 @@ build:
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
 
-    - npm-install
-
-    - script:
-        name: build
-        code: |
-          npm run build
-
-    - script:
-        name: list
-        code: |
-          ls -all
-
   after-steps:
     - slack-notifier:
         url: $SLACK_URL
@@ -27,15 +15,6 @@ build:
 
 deploy:
   steps:
-    - script:
-        name: clean-build
-        code: |
-          rm -rf node_modules
-          rm -rf ssh
-          rm -rf src
-          rm -rf tests
-          rm -rf .git*
-
     - heroku-deploy:
       key-name: HEROKU_DEPLOY_KEY
       user: $HEROKU_USER
