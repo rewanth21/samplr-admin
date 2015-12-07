@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Table } from 'react-bootstrap';
+import DateFormat from './DateFormat';
 
 export default class UserTable extends Component {
     static propTypes = {
@@ -17,6 +18,7 @@ export default class UserTable extends Component {
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Age</th>
+                        <th>Date Created</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,13 +30,14 @@ export default class UserTable extends Component {
                                 <td>{user.firstName}</td>
                                 <td>{user.lastName}</td>
                                 <td>{user.age}</td>
+                                <td><DateFormat date={user.created} /></td>
                             </tr>
                         );
                     })}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="4">
+                        <td colSpan="6">
                             You have <b>{users.length}</b> users
                         </td>
                     </tr>

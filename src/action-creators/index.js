@@ -263,7 +263,7 @@ export function updateGroup (data) {
                     dispatch(createGroupFailed())
                 } else {
                     dispatch(createGroupSucceeded(body));
-                    dispatch(updatePath('/'));
+                    dispatch(updatePath('/group/'+data.id));
                 }
             });
     };
@@ -683,6 +683,49 @@ export function createUserFailed (data) {
 export function createUserSucceeded (data) {
     return {
         type: apiConstants.CREATE_USER_SUCCEEDED,
+        data,
+    };
+}
+
+
+// UPDATE SURVEY
+
+export function updateSurvey (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.UPDATE_SURVEY,
+            data
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .put(API_ROOT + '/survey/'+data.surveyId)
+            .send(JSON.stringify(data.model))
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(createGroupFailed())
+                } else {
+                    dispatch(createGroupSucceeded(body));
+                    dispatch(updatePath('/group/'+data.groupId));
+                }
+            });
+    };
+}
+
+export function updateSurveyFailed (data) {
+    return {
+        type: apiConstants.UPDATE_SURVEY_FAILED,
+        data
+    };
+}
+
+export function updateSurveySucceeded (data) {
+    return {
+        type: apiConstants.UPDATE_SURVEY_SUCCEEDED,
         data,
     };
 }
