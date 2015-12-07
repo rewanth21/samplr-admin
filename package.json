@@ -9,8 +9,7 @@
     "start": "./node_modules/.bin/webpack --color --watch & ./node_modules/.bin/webpack-dev-server",
     "build": "./node_modules/.bin/webpack",
     "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
-    "test:watch": "npm test -- --watch",
-    "postinstall": "npm run build"
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -44,8 +43,7 @@
     "redux-simple-router": "0.0.10",
     "redux-thunk": "^1.0.0",
     "superagent": "^1.5.0",
-    "superagent-defaults": "^0.1.14",
-    "webpack": "^1.9.11"
+    "superagent-defaults": "^0.1.14"
   },
   "devDependencies": {
     "babel-core": "^6.2.1",
