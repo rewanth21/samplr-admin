@@ -600,3 +600,44 @@ export function addSurveyUserSucceeded (data) {
         data,
     };
 }
+
+
+// CREATE USER
+export function createUser (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.CREATE_USER,
+            data
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .post(API_ROOT + '/auth/register/client')
+            .send(JSON.stringify(data))
+            .end((err, res={}) => {
+                const { body } = res;
+                if (err) {
+                    dispatch(createUserFailed())
+                } else {
+                    dispatch(createUserSucceeded(body));
+                    dispatch(updatePath('/users'));
+                }
+            });
+    };
+}
+
+export function createUserFailed (data) {
+    return {
+        type: apiConstants.CREATE_USER_FAILED,
+        data
+    };
+}
+
+export function createUserSucceeded (data) {
+    return {
+        type: apiConstants.CREATE_USER_SUCCEEDED,
+        data,
+    };
+}

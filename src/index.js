@@ -26,6 +26,7 @@ import ViewSurveyContainer from './containers/ViewSurveyContainer';
 import AddSurveyQuestionsContainer from './containers/AddSurveyQuestionsContainer';
 import AddSurveyUsersContainer from './containers/AddSurveyUsersContainer';
 import UsersContainer from './containers/UsersContainer';
+import CreateUserContainer from './containers/CreateUserContainer';
 import NotFound from './containers/NotFound'
 
 import thunkMiddleware from 'redux-thunk';
@@ -69,6 +70,7 @@ class Root extends Component {
                             <Route path="group/:groupId/survey/:surveyId/add-users" component={AddSurveyUsersContainer} />
                             <Route path="group/:groupId/survey/:surveyId" component={ViewSurveyContainer} />
                             <Route path="group/:id" component={GroupSurveysContainer} />
+                            <Route path='users/create' component={CreateUserContainer} />
                             <Route path='users' component={UsersContainer} />
                         </Route>
                         <Route path="*" component={NotFound}/>
