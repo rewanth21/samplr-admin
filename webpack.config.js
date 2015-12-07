@@ -42,15 +42,6 @@ module.exports = {
         })
     ],
     module: {
-        include: [path.join(__dirname, 'src'), path.join(__dirname, 'node_modules')],
-        // for modules
-        resolve: {
-            fallback: [path.join(__dirname, 'node_modules')]
-        },
-        // same issue, for loaders like babel
-        resolveLoader: {
-            fallback: [path.join(__dirname, 'node_modules')]
-        },
         loaders: [
             {
                 test: /\.js$/,
