@@ -603,8 +603,13 @@ export function addSurveyUserSucceeded (data) {
 
 
 // CREATE USER
-export function createUser (data) {
+export function createUser (isResearcher, data, whenDone) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    let apiUrl = '/auth/register/client';
+    if (isResearcher === true) {
+        apiUrl = '/auth/register';
+    }
 
     return dispatch => {
         dispatch({
@@ -614,15 +619,16 @@ export function createUser (data) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .post(API_ROOT + '/auth/register/client')
+            .post(API_ROOT + apiUrl)
             .send(JSON.stringify(data))
             .end((err, res={}) => {
                 const { body } = res;
                 if (err) {
-                    dispatch(createUserFailed())
+                    dispatch(createUserFailed(body))
                 } else {
                     dispatch(createUserSucceeded(body));
                     dispatch(updatePath('/users'));
+                    whenDone();
                 }
             });
     };

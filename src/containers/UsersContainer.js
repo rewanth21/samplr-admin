@@ -9,7 +9,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 class UsersContainer extends Component {
     render() {
         const { dispatch, users, user } = this.props
-        console.log(users);
         return (
             <div className="container">
                 <Panel>

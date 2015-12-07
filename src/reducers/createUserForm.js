@@ -6,6 +6,7 @@ const initialState = {
     lastName: '',
     password: '',
     age: null,
+    isResearcher: false,
     isLoading: false,
 }
 
@@ -14,7 +15,7 @@ export default function createUserForm (state = initialState, action = {}) {
     const { data, type } = action;
 
     switch (type) {
-        case APIEvents.CREATE_GROUP:
+        case APIEvents.CREATE_USER:
             return {
                 ...state,
                 email: data.email,
@@ -23,18 +24,21 @@ export default function createUserForm (state = initialState, action = {}) {
                 password: data.password,
                 age: data.age,
                 isLoading: true,
+                error: undefined
             };
 
-        case APIEvents.CREATE_GROUP_SUCCEEDED:
-            return {
-                ...state,
-                isLoading: false
-            };
-
-        case APIEvents.CREATE_GROUP_FAILED:
+        case APIEvents.CREATE_USER_SUCCEEDED:
             return {
                 ...state,
                 isLoading: false,
+                error: undefined
+            };
+
+        case APIEvents.CREATE_USER_FAILED:
+            return {
+                ...state,
+                isLoading: false,
+                error: data
             };
 
         default:

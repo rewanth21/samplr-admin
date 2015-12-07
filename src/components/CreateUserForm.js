@@ -1,9 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import * as ENUMS from '../constants/Enums';
-import { Input, Button } from 'react-bootstrap';
+import { Input, Button, Alert } from 'react-bootstrap';
 import _ from 'lodash';
 
-export default class CreateGroupForm extends Component {
+import {reduxForm} from 'redux-form';
+
+const formFields = [
+    'email',
+    'firstName',
+    'lastName',
+    'password',
+    'age',
+    'isResearcher'
+]
+
+class CreateGroupForm extends Component {
 
     // horrible Babel bug:
     constructor(props) {
@@ -24,17 +35,43 @@ export default class CreateGroupForm extends Component {
 
         const { createUser } = this.props;
 
-        createUser({
-            email: this.refs.email.getValue(),
-            firstName: this.refs.firstName.getValue(),
-            lastName: this.refs.lastName.getValue(),
-            password: this.refs.password.getValue(),
-            age: this.refs.age.getValue(),
+        createUser(this.props.fields.isResearcher.value, {
+            email: this.props.fields.email.value,
+            firstName: this.props.fields.firstName.value,
+            lastName: this.props.fields.lastName.value,
+            password: this.props.fields.password.value,
+            age: this.props.fields.age.value,
+        }, () => {
+            this.props.resetForm();
         });
+
     }
 
     render() {
-        const { createUserForm: { email, firstName, lastName, age, isLoading } } = this.props;
+        const {
+            createUserForm: {
+                isLoading,
+                error
+            },
+            fields: {
+                email,
+                firstName,
+                lastName,
+                age,
+                password,
+                isResearcher
+            }
+        } = this.props;
+
+        let errorMessage = null;
+        if (error) {
+            errorMessage = (
+                <Alert bsStyle="danger">
+                    <h4>{error.title}</h4>
+                    <p>{error.error}</p>
+                </Alert>
+            );
+        }
 
         return (
             <form onSubmit={this.handleFormSubmit}>
@@ -43,36 +80,46 @@ export default class CreateGroupForm extends Component {
                     ref="email"
                     defaultValue={email}
                     label="Email"
-                    placeholder="Email address this user will use to login"/>
+                    placeholder="Email address this user will use to login"
+                    {...email}/>
 
                 <Input type='text'
                     id='firstName'
                     ref="firstName"
-                    defaultValue={firstName}
                     label="First Name"
-                    placeholder="The user's first name"/>
+                    placeholder="The user's first name"
+                    {...firstName}/>
 
                 <Input type='text'
                     id='lastName'
                     ref="lastName"
-                    defaultValue={lastName}
                     label="Last Name"
-                    placeholder="The user's last name"/>
+                    placeholder="The user's last name"
+                    {...lastName}/>
 
                 <Input type='number'
                     id='age'
                     ref="age"
-                    defaultValue={age}
                     label="Age"
-                    placeholder="The user's age"/>
+                    placeholder="The user's age"
+                    {...age}/>
 
                 <Input type='password'
                     id='password'
                     ref="password"
-                    defaultValue={password}
                     label="password"
-                    placeholder="Password for the user"/>
+                    placeholder="Password for the user"
+                    {...password}/>
 
+                <Input type='checkbox'
+                    id='isResearcher'
+                    ref="isResearcher"
+                    label="Is this user a Researcher?"
+                    help={<span>If checked, this user will be able to access this admin panel</span>}
+                    placeholder="Password for the user"
+                    {...isResearcher}/>
+
+                {errorMessage}
 
                 <Button type="submit"
                     bsStyle="primary"
@@ -84,3 +131,7 @@ export default class CreateGroupForm extends Component {
     }
 
 }
+export default reduxForm({
+    form: 'simple',
+    fields: formFields
+})(CreateGroupForm);
