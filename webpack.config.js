@@ -1,5 +1,5 @@
-var path = require('path')
-var webpack = require('webpack')
+var path = require('path');
+var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -22,7 +22,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/static/'
+        publicPath: '/'
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
@@ -38,7 +38,7 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.DefinePlugin({
-            'API_ROOT': JSON.stringify('http://samplr-api-dev.herokuapp.com')
+            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'https://samplr-api-dev.herokuapp.com')
         })
     ],
     module: {
