@@ -2,7 +2,13 @@
 
 const express = require('express');
 const app = express();
+const indexFile = require('./middleware/index-file');
 
-app.use(express.static('dist'));
+let OPTIONS = {
+  BUILD_DIR: 'dist'
+};
+
+app.use(express.static(OPTIONS.BUILD_DIR));
+app.use(indexFile(OPTIONS.BUILD_DIR));
 
 app.listen(process.env.PORT || 3000);
