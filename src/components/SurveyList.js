@@ -52,6 +52,9 @@ export default class SurveyList extends Component {
                                             <LinkContainer to={'/group/'+groupId+'/survey/'+survey.id+'/add-questions'}>
                                                 <Button>Add Questions</Button>
                                             </LinkContainer>
+                                            <LinkContainer to={'/group/'+groupId+'/survey/'+survey.id+'/add-users'}>
+                                                <Button>Add Users</Button>
+                                            </LinkContainer>
                                         </ButtonGroup>
                                     </ButtonToolbar>
                                 </td>

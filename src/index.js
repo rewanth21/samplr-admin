@@ -24,6 +24,7 @@ import CreateGroupsContainer from './containers/CreateGroupsContainer';
 import CreateSurveyContainer from './containers/CreateSurveyContainer';
 import ViewSurveyContainer from './containers/ViewSurveyContainer';
 import AddSurveyQuestionsContainer from './containers/AddSurveyQuestionsContainer';
+import AddSurveyUsersContainer from './containers/AddSurveyUsersContainer';
 import UsersContainer from './containers/UsersContainer';
 import NotFound from './containers/NotFound'
 
@@ -65,6 +66,7 @@ class Root extends Component {
                             <Route path="groups/create" component={CreateGroupsContainer} />
                             <Route path="create-survey/:id" component={CreateSurveyContainer} />
                             <Route path="group/:groupId/survey/:surveyId/add-questions" component={AddSurveyQuestionsContainer} />
+                            <Route path="group/:groupId/survey/:surveyId/add-users" component={AddSurveyUsersContainer} />
                             <Route path="group/:groupId/survey/:surveyId" component={ViewSurveyContainer} />
                             <Route path="group/:id" component={GroupSurveysContainer} />
                             <Route path='users' component={UsersContainer} />

@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import * as actionCreators from '../action-creators';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import UserList from '../components/UserList'
+import UsersList from '../components/UsersList'
 import { Panel } from 'react-bootstrap';
 
-class Users extends Component {
+class UsersContainer extends Component {
     render() {
         const { dispatch, users, user } = this.props
+        console.log(users);
         return (
             <div className="container">
                 <Panel>
@@ -15,7 +16,10 @@ class Users extends Component {
                     <p>
                         This is a list of all users you have associated with your account.
                     </p>
-                    <UserList users={users} user={user} {...bindActionCreators(actionCreators, dispatch)} />
+                    <UsersList
+                        users={users}
+                        user={user}
+                        {...bindActionCreators(actionCreators, dispatch)} />
                 </Panel>
             </div>
         )
@@ -29,4 +33,4 @@ function select(state) {
     }
 }
 
-export default connect(select)(Users)
+export default connect(select)(UsersContainer)

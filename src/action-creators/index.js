@@ -286,18 +286,18 @@ export function getGroupSurveysSucceeded (data) {
 
 // USERS
 
-export function getUsers (researcherId) {
+export function getUsers (data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
         dispatch({
             type: apiConstants.GET_USERS,
-            researcherId
+            data
         });
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/user/'+researcherId+'/user')
+            .get(API_ROOT + '/user/'+data+'/user')
             .end((err, res={}) => {
                 const { body } = res;
 
@@ -518,6 +518,85 @@ export function addSurveyQuestionFailed (data) {
 export function addSurveyQuestionSucceeded (data) {
     return {
         type: apiConstants.ADD_SURVEY_QUESTION_SUCCEEDED,
+        data,
+    };
+}
+
+
+// GET SURVEY USERS
+export function getSurveyUsers (surveyId) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.GET_SURVEY_USERS,
+            surveyId
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .get(API_ROOT + '/survey/'+surveyId+'/user')
+            .end((err, res={}) => {
+                const { body } = res;
+                if (err) {
+                    dispatch(getSurveyUsersFailed())
+                } else {
+                    dispatch(getSurveyUsersSucceeded(body));
+                }
+            });
+    };
+}
+
+export function getSurveyUsersFailed (data) {
+    return {
+        type: apiConstants.GET_SURVEY_USERS_FAILED,
+        data
+    };
+}
+
+export function getSurveyUsersSucceeded (data) {
+    return {
+        type: apiConstants.GET_SURVEY_USERS_SUCCEEDED,
+        data,
+    };
+}
+
+
+// ADD SURVEY USER
+export function addSurveyUser (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.ADD_SURVEY_USER,
+            data
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .put(API_ROOT + '/survey/'+data.surveyId+'/user')
+            .send(JSON.stringify(data.data))
+            .end((err, res={}) => {
+                const { body } = res;
+                if (err) {
+                    dispatch(addSurveyUserFailed())
+                } else {
+                    dispatch(addSurveyUserSucceeded(body));
+                }
+            });
+    };
+}
+
+export function addSurveyUserFailed (data) {
+    return {
+        type: apiConstants.ADD_SURVEY_USER_FAILED,
+        data
+    };
+}
+
+export function addSurveyUserSucceeded (data) {
+    return {
+        type: apiConstants.ADD_SURVEY_USER_SUCCEEDED,
         data,
     };
 }

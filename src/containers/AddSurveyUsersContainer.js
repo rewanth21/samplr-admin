@@ -6,35 +6,49 @@ import { updatePath } from 'redux-simple-router'
 import { Panel, Breadcrumb, BreadcrumbItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import SurveyQuestionsForm from '../components/SurveyQuestionsForm';
-import SurveyQuestionsList from '../components/SurveyQuestionsList';
+import _ from 'lodash';
+
+import SurveyUsersForm from '../components/SurveyUsersForm';
+import SurveyUsersList from '../components/SurveyUsersList';
 
 function select(state) {
     return {
+        user: state.user,
         group: state.group,
         survey: state.survey,
-        addSurveyQuestionsForm: state.addSurveyQuestionsForm
+        users: state.users,
+        surveyUsers: state.surveyUsers,
+        addSurveyUserForm: state.addSurveyUserForm
     };
 }
 
-class AddSurveyQuestionsPage extends Component {
+class AddSurveyUsersPage extends Component {
     componentWillMount () {
         this.props.getGroup(this.props.groupId);
         this.props.getSurvey(this.props.surveyId);
+        this.props.getSurveyUsers(this.props.surveyId);
+        this.props.getUsers(this.props.userId);
     }
 
     render (){
         const {
-            addSurveyQuestionsForm,
+            addSurveyUserForm,
             group,
+            users,
             survey,
+            surveyUsers,
             dispatch,
             surveyId
         } = this.props;
 
-        if (group.isLoading || survey.isLoading) {
+        if (group.isLoading || survey.isLoading || surveyUsers.isLoading) {
             return (<span>Loading...</span>);
         }
+
+        let filteredUsers = {
+            list: _.filter(users.list, (obj) => !_.findWhere(surveyUsers.list, obj)),
+            isLoading: false
+        };
 
         return (
             <Panel>
@@ -55,14 +69,16 @@ class AddSurveyQuestionsPage extends Component {
                 </Breadcrumb>
 
                 <h1>Survey <i>{survey.item.name}</i></h1>
-                <h2>Current Questions</h2>
-                <SurveyQuestionsList
+                <hr />
+                <h2>Current Users</h2>
+                <SurveyUsersList
                     surveyId={surveyId}
                     survey={survey}
                     {...bindActionCreators(actionCreators, dispatch)} />
-                <h2>Add Questions</h2>
-                <SurveyQuestionsForm
-                    addSurveyQuestionsForm={addSurveyQuestionsForm}
+                <h2>Add Users to a Survey</h2>
+                <SurveyUsersForm
+                    users={filteredUsers}
+                    addSurveyUserForm={addSurveyUserForm}
                     surveyId={surveyId}
                     groupId={this.props.groupId}
                     {...bindActionCreators(actionCreators, dispatch)} />
@@ -71,19 +87,30 @@ class AddSurveyQuestionsPage extends Component {
     }
 }
 
-class AddSurveyQuestionsContainer extends Component {
+class AddSurveyUsersContainer extends Component {
 
     render() {
-        const { addSurveyQuestionsForm, group, survey, dispatch } = this.props;
+        const {
+            addSurveyUserForm,
+            group,
+            survey,
+            surveyUsers,
+            dispatch,
+            user,
+            users
+        } = this.props;
 
         return (
             <div className="container">
-                <AddSurveyQuestionsPage
+                <AddSurveyUsersPage
                     groupId={this.props.routeParams.groupId}
-                    surveyId={this.props.routeParams.surveyId}
                     group={group}
-                    addSurveyQuestionsForm={addSurveyQuestionsForm}
+                    surveyId={this.props.routeParams.surveyId}
                     survey={survey}
+                    surveyUsers={surveyUsers}
+                    userId={user.userId}
+                    users={users}
+                    addSurveyUserForm={addSurveyUserForm}
                     dispatch={dispatch}
                     {...bindActionCreators(actionCreators, dispatch)} />
             </div>
@@ -91,4 +118,4 @@ class AddSurveyQuestionsContainer extends Component {
     }
 }
 
-export default connect(select)(AddSurveyQuestionsContainer);
+export default connect(select)(AddSurveyUsersContainer);

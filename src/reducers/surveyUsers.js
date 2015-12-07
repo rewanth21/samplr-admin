@@ -2,30 +2,30 @@ import * as APIEvents from '../constants/APIEvents';
 
 const initialState = {
     list: [],
-    isLoading: false
+    isLoading: true
 };
 
-export default function users (state = initialState, action = {}) {
+export default function surveyUsers (state = initialState, action = {}) {
 
     const { data, type } = action;
 
     switch (type) {
-        case APIEvents.GET_USERS:
+        case APIEvents.ADD_SURVEY_USER_SUCCEEDED:
             return {
                 ...state,
-                isLoading: true
-            };
-        case APIEvents.GET_USERS_SUCCEEDED:
+                list: [...state.list, data.users[0]]
+            }
+        case APIEvents.GET_SURVEY_USERS_SUCCEEDED:
             return {
                 ...state,
                 list: data,
                 isLoading: false
             };
 
-        case APIEvents.GET_USERS_FAILED:
+        case APIEvents.GET_SURVEY_USERS_FAILED:
             return {
                 ...state,
-                list: data,
+                list: [],
                 isLoading: false
             };
 
