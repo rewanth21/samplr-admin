@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../action-creators';
-import Dashboard from '../components/dashboard';
+import Dashboard from '../components/Dashboard';
 
 function select(state) {
     return {
