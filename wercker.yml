@@ -15,6 +15,11 @@ build:
         code: |
           npm run build
 
+    - script:
+        name: list
+        code: |
+          ls -all
+
   after-steps:
     - slack-notifier:
         url: $SLACK_URL
