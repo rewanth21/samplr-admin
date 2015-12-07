@@ -38,7 +38,7 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.DefinePlugin({
-            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'http://samplr-api-dev.herokuapp.com')
+            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'https://samplr-api-dev.herokuapp.com')
         })
     ],
     module: {
