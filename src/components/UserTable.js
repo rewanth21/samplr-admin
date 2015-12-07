@@ -13,7 +13,10 @@ export default class UserTable extends Component {
                 <thead>
                     <tr>
                         <th style={{width: 50}}>#</th>
-                        <th>Name</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,9 +24,10 @@ export default class UserTable extends Component {
                         return (
                             <tr key={index}>
                                 <td>{index + 1}</td>
-                                <td>
-                                    {user.email}
-                                </td>
+                                <td>{user.email}</td>
+                                <td>{user.firstName}</td>
+                                <td>{user.lastName}</td>
+                                <td>{user.age}</td>
                             </tr>
                         );
                     })}
