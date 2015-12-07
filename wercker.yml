@@ -8,6 +8,11 @@ build:
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
 
+    - script:
+        name: list
+        code: |
+          ls -all ./src/reducers
+
   after-steps:
     - slack-notifier:
         url: $SLACK_URL
@@ -15,6 +20,11 @@ build:
 
 deploy:
   steps:
+    - script:
+        name: list
+        code: |
+          ls -all ./src/reducers
+          
     - heroku-deploy:
       key-name: HEROKU_DEPLOY_KEY
       user: $HEROKU_USER
