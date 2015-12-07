@@ -52,6 +52,9 @@ export default class GroupList extends Component {
                                             <LinkContainer to={'/create-survey/'+group.id}>
                                                 <Button>Create Survey</Button>
                                             </LinkContainer>
+                                            <LinkContainer to={'/group/'+group.id+'/update'}>
+                                                <Button>Update Group</Button>
+                                            </LinkContainer>
                                         </ButtonGroup>
                                     </ButtonToolbar>
                                 </td>

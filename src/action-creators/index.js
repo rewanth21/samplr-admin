@@ -241,6 +241,48 @@ export function createGroupSucceeded (data) {
     };
 }
 
+// UPDATE GROUP
+
+export function updateGroup (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.UPDATE_GROUP,
+            data
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .put(API_ROOT + '/group/'+data.id)
+            .send(JSON.stringify(data.model))
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(createGroupFailed())
+                } else {
+                    dispatch(createGroupSucceeded(body));
+                    dispatch(updatePath('/'));
+                }
+            });
+    };
+}
+
+export function updateGroupFailed (data) {
+    return {
+        type: apiConstants.UPDATE_GROUP_FAILED,
+        data
+    };
+}
+
+export function updateGroupSucceeded (data) {
+    return {
+        type: apiConstants.UPDATE_GROUP_SUCCEEDED,
+        data,
+    };
+}
+
 // SURVEYS
 
 export function getGroupSurveys (groupId) {
