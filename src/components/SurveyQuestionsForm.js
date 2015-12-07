@@ -26,7 +26,6 @@ class SurveyQuestionsForm extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
 
-        console.log(this.props);
         let responses = [];
         this.props.fields.responses.forEach( (resp) => {
             responses.push({
@@ -40,7 +39,6 @@ class SurveyQuestionsForm extends Component {
             responses,
             surveyId: this.props.surveyId
         }
-        console.log(question);
 
         this.props.addSurveyQuestion(question);
         this.props.resetForm();

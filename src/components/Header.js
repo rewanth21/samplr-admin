@@ -13,14 +13,12 @@ export default class Header extends Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <LinkContainer to="/">
-                            <a href="/">Samplr Admin</a>
-                        </LinkContainer>
+                        <a>Samplr Admin</a>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        <LinkContainer to="/groups">
+                        <LinkContainer to="/">
                             <NavItem>
                                 Groups
                             </NavItem>

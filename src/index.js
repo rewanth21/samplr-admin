@@ -61,9 +61,8 @@ class Root extends Component {
             <div>
                 <Provider store={store}>
                     <Router history={history}>
-                        <Route path='/' component={AppContainer}>
-                            <IndexRoute component={DashboardContainer} />
-                            <Route path="groups" component={GroupsContainer} />
+                        <Route component={AppContainer}>
+                            <Route path='/' component={GroupsContainer} />
                             <Route path="groups/create" component={CreateGroupsContainer} />
                             <Route path="create-survey/:id" component={CreateSurveyContainer} />
                             <Route path="group/:groupId/survey/:surveyId/add-questions" component={AddSurveyQuestionsContainer} />

@@ -29,7 +29,7 @@ class CreateSurveyPage extends Component {
         return (
             <Panel>
                 <Breadcrumb>
-                    <LinkContainer to="/groups">
+                    <LinkContainer to="/">
                         <BreadcrumbItem>
                             Groups
                         </BreadcrumbItem>
@@ -40,7 +40,7 @@ class CreateSurveyPage extends Component {
                         </BreadcrumbItem>
                     </LinkContainer>
                     <BreadcrumbItem active>
-                        New Group
+                        New Survey
                     </BreadcrumbItem>
                 </Breadcrumb>
 

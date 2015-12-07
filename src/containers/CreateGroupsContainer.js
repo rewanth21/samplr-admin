@@ -21,7 +21,7 @@ class CreateGroupsContainer extends Component {
             <div className="container">
                 <Panel>
                     <Breadcrumb>
-                        <LinkContainer to="groups">
+                        <LinkContainer to="/">
                             <BreadcrumbItem>
                                 Groups
                             </BreadcrumbItem>

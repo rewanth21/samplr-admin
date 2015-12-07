@@ -13,7 +13,6 @@ export function applicationLoaded(data) {
     // if the visitor doesn't have an auth token cookie,
     // show them a login page
     if (!token) {
-        console.log('No token!');
         return dispatch => {
             dispatch(userFetchFailed())
         }
@@ -40,14 +39,14 @@ export function applicationLoaded(data) {
                     if (body.type === 'RESEARCHER') {
                         dispatch(userFetchSucceeded(body));
                     } else {
-                        dispatch(userFetchFailed())
+                        dispatch(userFetchFailed());
                     }
                 }
             });
     };
 }
 
-export function loginSubmitted(data) {
+export function loginSubmitted(data, history) {
     return dispatch => {
         dispatch({
             type: constants.LOGIN_SUBMITTED,
@@ -65,7 +64,7 @@ export function loginSubmitted(data) {
                 } else {
                     Cookie.set(authConstants.AUTH_COOKIE, body.token);
                     window.location.reload();
-                    //dispatch(updatePath('/'));
+                    dispatch(loginSucceeded())
                 }
             });
     };
@@ -128,7 +127,6 @@ export function userLogout(data) {
 
 export function userGetGroups (userId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log('get groups');
 
     return dispatch => {
         dispatch({
@@ -167,7 +165,6 @@ export function userGetGroupsSucceeded (data) {
 
 export function getGroup (groupId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log('get group');
 
     return dispatch => {
         dispatch({
@@ -224,7 +221,7 @@ export function createGroup (data) {
                     dispatch(createGroupFailed())
                 } else {
                     dispatch(createGroupSucceeded(body));
-                    dispatch(updatePath('/groups'));
+                    dispatch(updatePath('/'));
                 }
             });
     };

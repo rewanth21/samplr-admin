@@ -27,7 +27,7 @@ class GroupsSurveysPage extends Component {
         return (
             <div>
                 <Breadcrumb>
-                    <LinkContainer to="/groups">
+                    <LinkContainer to="/">
                         <BreadcrumbItem>
                             Groups
                         </BreadcrumbItem>
