@@ -60,7 +60,7 @@ export function loginSubmitted(data, history) {
                 const { body } = res;
 
                 if (err) {
-                    dispatch(loginFailed());
+                    dispatch(loginFailed(body));
                 } else {
                     Cookie.set(authConstants.AUTH_COOKIE, body.token, { expires: 14 });
                     window.location.reload();
