@@ -92,18 +92,18 @@ class SurveyQuestionsForm extends Component {
 
                                         <div className="form-group">
                                             <label className="col-sm-2 control-label">
-                                                Response Value
-                                            </label>
-                                            <div className="col-sm-10">
-                                                <input type="number" className="form-control" {...response.responseValue} />
-                                            </div>
-                                        </div>
-                                        <div className="form-group">
-                                            <label className="col-sm-2 control-label">
                                                 Response Title
                                             </label>
                                             <div className="col-sm-10">
                                                 <input type="title" className="form-control" {...response.responseTitle} />
+                                            </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="col-sm-2 control-label">
+                                                Response Value
+                                            </label>
+                                            <div className="col-sm-10">
+                                                <input type="number" className="form-control" {...response.responseValue} />
                                             </div>
                                         </div>
                                     </div>

@@ -385,7 +385,7 @@ export function createSurvey (data) {
                     dispatch(createSurveyFailed())
                 } else {
                     dispatch(createSurveySucceeded(body));
-                    dispatch(updatePath('group/'+data.groupId+'/survey/'+data.id+'/add-questions'));
+                    dispatch(updatePath('group/'+body.groupId+'/survey/'+body.id+'/add-questions'));
                 }
             });
     };
