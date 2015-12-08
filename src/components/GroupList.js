@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Table, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import { LinkContainer } from 'react-router-bootstrap';
+import DateFormat from './DateFormat';
 
 export default class GroupList extends Component {
 
@@ -31,6 +33,7 @@ export default class GroupList extends Component {
                         <th>#</th>
                         <th>Name</th>
                         <th>Created</th>
+                        <th>Modified</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -40,16 +43,25 @@ export default class GroupList extends Component {
                             <tr key={index}>
                                 <td>{index + 1}</td>
                                 <td>
-                                    <Link to={'group/'+group.id}>
+                                    <Link to={'/group/'+group.id}>
                                         {group.name}
                                     </Link>
                                 </td>
-                                <td>{group.created}</td>
+                                <td>
+                                    <DateFormat date={group.created}/>
+                                </td>
+                                <td>
+                                    <DateFormat date={group.modified}/>
+                                </td>
                                 <td>
                                     <ButtonToolbar>
                                         <ButtonGroup bsSize="xsmall">
-                                            <Button>Create Survey</Button>
-                                            <Button>Edit Name</Button>
+                                            <LinkContainer to={'/create-survey/'+group.id}>
+                                                <Button>Create Survey</Button>
+                                            </LinkContainer>
+                                            <LinkContainer to={'/group/'+group.id+'/update'}>
+                                                <Button>Update Group</Button>
+                                            </LinkContainer>
                                         </ButtonGroup>
                                     </ButtonToolbar>
                                 </td>
@@ -59,7 +71,7 @@ export default class GroupList extends Component {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colSpan="4">
+                        <td colSpan="5">
                             You have <b>{groups.list.length}</b> groups
                         </td>
                     </tr>

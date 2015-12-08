@@ -13,7 +13,6 @@ export function applicationLoaded(data) {
     // if the visitor doesn't have an auth token cookie,
     // show them a login page
     if (!token) {
-        console.log('No token!');
         return dispatch => {
             dispatch(userFetchFailed())
         }
@@ -40,14 +39,14 @@ export function applicationLoaded(data) {
                     if (body.type === 'RESEARCHER') {
                         dispatch(userFetchSucceeded(body));
                     } else {
-                        dispatch(userFetchFailed())
+                        dispatch(userFetchFailed());
                     }
                 }
             });
     };
 }
 
-export function loginSubmitted(data) {
+export function loginSubmitted(data, history) {
     return dispatch => {
         dispatch({
             type: constants.LOGIN_SUBMITTED,
@@ -63,9 +62,9 @@ export function loginSubmitted(data) {
                 if (err) {
                     dispatch(loginFailed());
                 } else {
-                    Cookie.set(authConstants.AUTH_COOKIE, body.token);
+                    Cookie.set(authConstants.AUTH_COOKIE, body.token, { expires: 14 });
                     window.location.reload();
-                    //dispatch(updatePath('/'));
+                    dispatch(loginSucceeded())
                 }
             });
     };
@@ -128,7 +127,6 @@ export function userLogout(data) {
 
 export function userGetGroups (userId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log('get groups');
 
     return dispatch => {
         dispatch({
@@ -167,7 +165,6 @@ export function userGetGroupsSucceeded (data) {
 
 export function getGroup (groupId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
-    console.log('get group');
 
     return dispatch => {
         dispatch({
@@ -224,7 +221,7 @@ export function createGroup (data) {
                     dispatch(createGroupFailed())
                 } else {
                     dispatch(createGroupSucceeded(body));
-                    dispatch(updatePath('/groups'));
+                    dispatch(updatePath('/'));
                 }
             });
     };
@@ -240,6 +237,48 @@ export function createGroupFailed (data) {
 export function createGroupSucceeded (data) {
     return {
         type: apiConstants.CREATE_GROUP_SUCCEEDED,
+        data,
+    };
+}
+
+// UPDATE GROUP
+
+export function updateGroup (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.UPDATE_GROUP,
+            data
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .put(API_ROOT + '/group/'+data.id)
+            .send(JSON.stringify(data.model))
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(createGroupFailed())
+                } else {
+                    dispatch(createGroupSucceeded(body));
+                    dispatch(updatePath('/group/'+data.id));
+                }
+            });
+    };
+}
+
+export function updateGroupFailed (data) {
+    return {
+        type: apiConstants.UPDATE_GROUP_FAILED,
+        data
+    };
+}
+
+export function updateGroupSucceeded (data) {
+    return {
+        type: apiConstants.UPDATE_GROUP_SUCCEEDED,
         data,
     };
 }
@@ -644,6 +683,49 @@ export function createUserFailed (data) {
 export function createUserSucceeded (data) {
     return {
         type: apiConstants.CREATE_USER_SUCCEEDED,
+        data,
+    };
+}
+
+
+// UPDATE SURVEY
+
+export function updateSurvey (data) {
+    const token = Cookie.get(authConstants.AUTH_COOKIE);
+
+    return dispatch => {
+        dispatch({
+            type: apiConstants.UPDATE_SURVEY,
+            data
+        });
+
+        return request
+            .set(authConstants.AUTH_HEADER, token)
+            .put(API_ROOT + '/survey/'+data.surveyId)
+            .send(JSON.stringify(data.model))
+            .end((err, res={}) => {
+                const { body } = res;
+
+                if (err) {
+                    dispatch(createGroupFailed())
+                } else {
+                    dispatch(createGroupSucceeded(body));
+                    dispatch(updatePath('/group/'+data.groupId));
+                }
+            });
+    };
+}
+
+export function updateSurveyFailed (data) {
+    return {
+        type: apiConstants.UPDATE_SURVEY_FAILED,
+        data
+    };
+}
+
+export function updateSurveySucceeded (data) {
+    return {
+        type: apiConstants.UPDATE_SURVEY_SUCCEEDED,
         data,
     };
 }

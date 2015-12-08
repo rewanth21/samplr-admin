@@ -26,6 +26,8 @@ import ViewSurveyContainer from './containers/ViewSurveyContainer';
 import AddSurveyQuestionsContainer from './containers/AddSurveyQuestionsContainer';
 import AddSurveyUsersContainer from './containers/AddSurveyUsersContainer';
 import UsersContainer from './containers/UsersContainer';
+import UpdateGroupContainer from './containers/UpdateGroupContainer';
+import UpdateSurveyContainer from './containers/UpdateSurveyContainer';
 import CreateUserContainer from './containers/CreateUserContainer';
 import NotFound from './containers/NotFound'
 
@@ -61,15 +63,16 @@ class Root extends Component {
             <div>
                 <Provider store={store}>
                     <Router history={history}>
-                        <Route path='/' component={AppContainer}>
-                            <IndexRoute component={DashboardContainer} />
-                            <Route path="groups" component={GroupsContainer} />
+                        <Route component={AppContainer}>
+                            <Route path='/' component={GroupsContainer} />
                             <Route path="groups/create" component={CreateGroupsContainer} />
                             <Route path="create-survey/:id" component={CreateSurveyContainer} />
                             <Route path="group/:groupId/survey/:surveyId/add-questions" component={AddSurveyQuestionsContainer} />
                             <Route path="group/:groupId/survey/:surveyId/add-users" component={AddSurveyUsersContainer} />
+                            <Route path="group/:groupId/survey/:surveyId/update" component={UpdateSurveyContainer} />
                             <Route path="group/:groupId/survey/:surveyId" component={ViewSurveyContainer} />
                             <Route path="group/:id" component={GroupSurveysContainer} />
+                            <Route path="group/:id/update" component={UpdateGroupContainer} />
                             <Route path='users/create' component={CreateUserContainer} />
                             <Route path='users' component={UsersContainer} />
                         </Route>

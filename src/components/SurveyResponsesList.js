@@ -34,9 +34,6 @@ class SurveyList extends Component {
             );
         }
 
-        console.log(surveyQuestions);
-        console.log(surveyResponses.list);
-
         return (
             <div>
                 <p>
@@ -47,7 +44,6 @@ class SurveyList extends Component {
                         let questionResponses = _.filter(surveyResponses.list, (resp) => {
                             return resp.question.id === question.id;
                         });
-                        console.log(questionResponses);
                         return (
                             <ListGroupItem key={index}>
                                 <h3>{question.title}</h3>

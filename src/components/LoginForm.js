@@ -26,7 +26,7 @@ export default class LoginFormComponent extends Component {
         loginSubmitted({
             email: this.refs.email.getValue(),
             password: this.refs.password.getValue()
-        });
+        }, this.context.history);
     }
 
     render() {

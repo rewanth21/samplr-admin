@@ -39,7 +39,7 @@ class AddSurveyQuestionsPage extends Component {
         return (
             <Panel>
                 <Breadcrumb>
-                    <LinkContainer to="/groups">
+                    <LinkContainer to="/">
                         <BreadcrumbItem>
                             Groups
                         </BreadcrumbItem>
