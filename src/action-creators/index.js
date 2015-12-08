@@ -260,9 +260,9 @@ export function updateGroup (data) {
                 const { body } = res;
 
                 if (err) {
-                    dispatch(createGroupFailed())
+                    dispatch(updateGroupFailed())
                 } else {
-                    dispatch(createGroupSucceeded(body));
+                    dispatch(updateGroupSucceeded(body));
                     dispatch(updatePath('/group/'+data.id));
                 }
             });
