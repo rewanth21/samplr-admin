@@ -62,7 +62,7 @@ export function loginSubmitted(data, history) {
                 if (err) {
                     dispatch(loginFailed());
                 } else {
-                    Cookie.set(authConstants.AUTH_COOKIE, body.token);
+                    Cookie.set(authConstants.AUTH_COOKIE, body.token, { expires: 7 });
                     window.location.reload();
                     dispatch(loginSucceeded())
                 }
