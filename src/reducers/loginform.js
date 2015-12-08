@@ -3,6 +3,7 @@ import * as authEvents from '../constants/AuthEvents';
 const initialState = {
     username: '',
     isLoading: false,
+    hasError: false
 };
 
 export default function loginForm (state = initialState, action = {}) {
@@ -24,6 +25,7 @@ export default function loginForm (state = initialState, action = {}) {
             return {
                 ...state,
                 isLoading: false,
+                hasError: true
             };
 
         default:
