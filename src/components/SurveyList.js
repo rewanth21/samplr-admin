@@ -3,8 +3,7 @@ import { Table, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import DateFormat from './DateFormat';
-import Cookie from 'js-cookie';
-import { AUTH_COOKIE } from '../constants/Auth';
+import getExportURL from '../utils/export';
 
 export default class SurveyList extends Component {
 
@@ -26,11 +25,6 @@ export default class SurveyList extends Component {
             return (
                 <p>You have no surveys.</p>
             );
-        }
-
-        function getExportURL (survey) {
-            const token = Cookie.get(AUTH_COOKIE);
-            return API_ROOT+'/survey/'+survey.id+'/response/csv?auth='+token
         }
 
         return (

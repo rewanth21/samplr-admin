@@ -95,7 +95,10 @@ class SurveyQuestionsForm extends Component {
                                                 Response Title
                                             </label>
                                             <div className="col-sm-10">
-                                                <input type="title" className="form-control" {...response.responseTitle} />
+                                                <input type="title"
+                                                    className="form-control"
+                                                    {...response.responseTitle}
+                                                    placeholder="Ask your question here" />
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -103,7 +106,10 @@ class SurveyQuestionsForm extends Component {
                                                 Response Value
                                             </label>
                                             <div className="col-sm-10">
-                                                <input type="number" className="form-control" {...response.responseValue} />
+                                                <input type="number"
+                                                    className="form-control"
+                                                    {...response.responseValue}
+                                                    placeholder="This is a number that represents the response" />
                                             </div>
                                         </div>
                                     </div>
