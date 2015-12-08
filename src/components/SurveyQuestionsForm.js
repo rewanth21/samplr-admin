@@ -92,18 +92,24 @@ class SurveyQuestionsForm extends Component {
 
                                         <div className="form-group">
                                             <label className="col-sm-2 control-label">
-                                                Response Value
+                                                Response Title
                                             </label>
                                             <div className="col-sm-10">
-                                                <input type="number" className="form-control" {...response.responseValue} />
+                                                <input type="title"
+                                                    className="form-control"
+                                                    {...response.responseTitle}
+                                                    placeholder="Ask your question here" />
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label className="col-sm-2 control-label">
-                                                Response Title
+                                                Response Value
                                             </label>
                                             <div className="col-sm-10">
-                                                <input type="title" className="form-control" {...response.responseTitle} />
+                                                <input type="number"
+                                                    className="form-control"
+                                                    {...response.responseValue}
+                                                    placeholder="This is a number that represents the response" />
                                             </div>
                                         </div>
                                     </div>
