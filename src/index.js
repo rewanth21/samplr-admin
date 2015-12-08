@@ -17,7 +17,6 @@ import { createHistory } from 'history';
 import configureStore from './store/configureStore'
 
 import AppContainer from './containers/AppContainer';
-import DashboardContainer from './containers/DashboardContainer';
 import GroupsContainer from './containers/GroupsContainer';
 import GroupSurveysContainer from './containers/GroupSurveysContainer';
 import CreateGroupsContainer from './containers/CreateGroupsContainer';
