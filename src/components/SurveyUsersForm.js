@@ -123,7 +123,7 @@ class SurveyUsersForm extends Component {
                 <Button type="submit"
                     bsStyle="primary"
                     disabled={isLoading}>
-                    { isLoading ? <span>Loading...</span> : <span>Add Question</span> }
+                    { isLoading ? <span>Loading...</span> : <span>Add User</span> }
                 </Button>
             </form>
         );
