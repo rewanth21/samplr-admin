@@ -3,6 +3,8 @@ import { Table, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import DateFormat from './DateFormat';
+import Cookie from 'js-cookie';
+import { AUTH_COOKIE } from '../constants/Auth';
 
 export default class SurveyList extends Component {
 
@@ -24,6 +26,11 @@ export default class SurveyList extends Component {
             return (
                 <p>You have no surveys.</p>
             );
+        }
+
+        function getExportURL (survey) {
+            const token = Cookie.get(AUTH_COOKIE);
+            return API_ROOT+'/survey/'+survey.id+'/response/csv?auth='+token
         }
 
         return (
@@ -62,7 +69,7 @@ export default class SurveyList extends Component {
                                             <LinkContainer to={'/group/'+groupId+'/survey/'+survey.id+'/add-users'}>
                                                 <Button>Add Users</Button>
                                             </LinkContainer>
-                                            <Button href={'/survey/'+survey.id+'/response/csv'}
+                                            <Button href={getExportURL(survey)}
                                                 target="_blank">
                                                 Export CSV
                                             </Button>
