@@ -30,7 +30,7 @@ class SurveyQuestionsForm extends Component {
         this.props.fields.responses.forEach( (resp) => {
             responses.push({
                 value: resp.responseValue.value,
-                title: resp.responseTitle.value
+                text: resp.responseTitle.value
             })
         });
 
