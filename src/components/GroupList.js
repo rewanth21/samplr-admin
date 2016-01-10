@@ -3,6 +3,7 @@ import { Table, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import DateFormat from './DateFormat';
+import Loading from './Loading';
 
 export default class GroupList extends Component {
 
@@ -11,12 +12,14 @@ export default class GroupList extends Component {
     }
 
 
+
+
     render() {
         const { user, groups } = this.props;
 
         if (groups.isLoading) {
             return (
-                <p>Loading groups...</p>
+                <Loading />
             );
         }
 

@@ -42,7 +42,7 @@ class SurveyList extends Component {
                                 {question.responses.map((resp, index) => {
                                     return (
                                         <li key={index}>
-                                            {resp.value}: {resp.title}
+                                            {resp.value}: {resp.text}
                                         </li>
                                     );
                                 })}

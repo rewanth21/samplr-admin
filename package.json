@@ -1,8 +1,7 @@
-
 {
   "name": "samplr-admin",
   "version": "1.0.0",
-  "description": "Redux TodoMVC example",
+  "description": "Admin panel for Samplr app",
   "engines": {
     "node": "4.2.3"
   },
@@ -13,11 +12,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rackt/redux.git"
+    "url": "https://github.com/AndrewBarba/samplr-admin.git"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rackt/redux/issues"
+    "url": "https://github.com/AndrewBarba/samplr-admin/issues"
   },
   "homepage": "http://rackt.github.io/redux",
   "dependencies": {
@@ -71,7 +70,6 @@
     "react-transform-hmr": "^1.0.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.12.3",
-    "todomvc-app-css": "^2.0.1",
     "url-loader": "^0.5.7",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-dev-server": "^1.14.0"

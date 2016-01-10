@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import LoginForm from '../components/LoginForm';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 function select(state) {
     return {
@@ -29,9 +30,18 @@ class AppContainer extends Component {
             <Header user={user} {...bindActionCreators(actionCreators, dispatch)} /> :
             null;
 
-        const contentBlock = user.authenticated ?
-            (children) :
-            (<LoginForm loginForm={loginForm} {...bindActionCreators(actionCreators, dispatch)} />);
+        let contentBlock;
+        if (user.authenticated) {
+            contentBlock = children;
+        } else if (user.hasFailedTokenFetch) {
+            contentBlock = (
+                <LoginForm loginForm={loginForm} {...bindActionCreators(actionCreators, dispatch)} />
+            );
+        } else {
+            contentBlock = (
+                <Loading />
+            );
+        }
 
         return (
             <div>

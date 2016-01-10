@@ -20,12 +20,14 @@ export default function updateGroupForm (state = initialState, action = {}) {
         case APIEvents.UPDATE_GROUP_SUCCEEDED:
             return {
                 ...state,
+                name: '',
                 isLoading: false
             };
 
         case APIEvents.UPDATE_GROUP_FAILED:
             return {
                 ...state,
+                name: '',
                 isLoading: false,
             };
 

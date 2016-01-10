@@ -52,10 +52,10 @@ module.exports = {
                     presets: ['es2015', 'react', 'stage-0']
                 }
             },
-            // {
-            //     test: /\.css?$/,
-            //     loaders: [ 'style', 'raw' ]
-            // },
+            {
+                test: /\.css?$/,
+                loaders: [ 'style', 'raw' ]
+            },
             {
                 test: /\.scss?$/,
                 loader: ExtractTextPlugin.extract('style-loader', [

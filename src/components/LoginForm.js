@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { Input, Button, Panel } from 'react-bootstrap';
+import { Input, Button, Panel, Alert } from 'react-bootstrap';
 
 export default class LoginFormComponent extends Component {
 
@@ -30,7 +30,17 @@ export default class LoginFormComponent extends Component {
     }
 
     render() {
-        const { loginForm: { username, isLoading } } = this.props;
+        const { loginForm: { username, isLoading, error } } = this.props;
+
+        let errorBox = null;
+        if (error) {
+            errorBox = (
+                <Alert bsStyle="danger">
+                    <h4>Incorrect username or password</h4>
+                    <p>Please make sure that the username and password combination is correct.</p>
+                </Alert>
+            );
+        }
 
         return (
             <div style={{
@@ -52,6 +62,8 @@ export default class LoginFormComponent extends Component {
                             ref="password"
                             label="Password"
                             placeholder="Enter your password" />
+
+                        {errorBox}
 
                         <Button type="submit"
                             bsStyle="primary"

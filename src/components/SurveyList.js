@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
 import DateFormat from './DateFormat';
 import getExportURL from '../utils/export';
+import Loading from './Loading';
 
 export default class SurveyList extends Component {
 
@@ -17,7 +18,7 @@ export default class SurveyList extends Component {
 
         if (surveys.isLoading) {
             return (
-                <p>Loading surveys...</p>
+                <Loading />
             );
         }
 
