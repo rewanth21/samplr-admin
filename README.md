@@ -1,4 +1,4 @@
-# Samplr-Admin
+# Samplr-Admin:
 
 This is the admin panel web application for the Samplr survey application.
 
