@@ -11,4 +11,4 @@ let OPTIONS = {
 app.use(express.static(OPTIONS.BUILD_DIR));
 app.use(indexFile(OPTIONS.BUILD_DIR));
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3002);

@@ -79,6 +79,7 @@ module.exports = {
     devServer: {
         contentBase: 'dist',
         historyApiFallback: true,
-        port: 2000
+        port: 2000,
+	host: 'ec2-54-187-112-42.us-west-2.compute.amazonaws.com'
     }
 }
