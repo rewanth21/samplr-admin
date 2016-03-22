@@ -38,7 +38,7 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.DefinePlugin({
-            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'http://ec2-54-186-220-145.us-west-2.compute.amazonaws.com')
+            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'http://ec2-54-186-220-145.us-west-2.compute.amazonaws.com:3000')
         })
     ],
     module: {
