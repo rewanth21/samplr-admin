@@ -6,6 +6,7 @@ import {reduxForm} from 'redux-form';
 
 const formFields = [
     'title',
+    'questionType',
     'responses[].responseTitle',
     'responses[].responseValue'
 ]
