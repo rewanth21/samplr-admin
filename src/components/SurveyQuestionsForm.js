@@ -49,7 +49,7 @@ class SurveyQuestionsForm extends Component {
 
     render() {
         const {
-            fields: { title, responses },
+            fields: { title, questionType, responses },
             submitting,
             addSurveyQuestionsForm: { isLoading }
         } = this.props;
