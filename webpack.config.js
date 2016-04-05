@@ -38,7 +38,7 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.DefinePlugin({
-            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'http://ec2-54-191-34-182.us-west-2.compute.amazonaws.com:3000')
+            'API_ROOT': JSON.stringify(process.env.API_ROOT || 'http://ec2-54-187-87-240.us-west-2.compute.amazonaws.com:3000')
         })
     ],
     module: {
@@ -80,6 +80,6 @@ module.exports = {
         contentBase: 'dist',
         historyApiFallback: true,
         port: 3000,
-	host: 'ec2-54-191-168-214.us-west-2.compute.amazonaws.com'
+	host: 'ec2-54-201-142-230.us-west-2.compute.amazonaws.com'
     }
 }
