@@ -5,3 +5,4 @@ export const SURVEY_TIMES = [
     { value: 'SUNSET', label: 'Sunset' },
     { value: 'NIGHT', label: 'Night' }
 ];
+

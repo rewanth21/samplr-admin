@@ -28,7 +28,7 @@ export function applicationLoaded(data) {
         return request
             .set(authConstants.AUTH_HEADER, token)
             .get(API_ROOT + '/me')
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 // if there's an error, the user isn't authorized
@@ -90,7 +90,7 @@ export function userFetched(data) {
         return request
             .set(authConstants.AUTH_HEADER, token)
             .get(API_ROOT + '/me')
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 err ?
@@ -125,7 +125,7 @@ export function userLogout(data) {
 
 // GROUPS
 
-export function userGetGroups (userId) {
+export function userGetGroups(userId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -136,8 +136,8 @@ export function userGetGroups (userId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/user/'+userId+'/group')
-            .end((err, res={}) => {
+            .get(API_ROOT + '/user/' + userId + '/group')
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 err ?
@@ -147,13 +147,13 @@ export function userGetGroups (userId) {
     };
 }
 
-export function userGetGroupsFailed () {
+export function userGetGroupsFailed() {
     return {
         type: apiConstants.GET_GROUPS_FAILED
     };
 }
 
-export function userGetGroupsSucceeded (data) {
+export function userGetGroupsSucceeded(data) {
     return {
         type: apiConstants.GET_GROUPS_SUCCEEDED,
         data,
@@ -163,7 +163,7 @@ export function userGetGroupsSucceeded (data) {
 
 // GET GROUP
 
-export function getGroup (groupId) {
+export function getGroup(groupId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -174,8 +174,8 @@ export function getGroup (groupId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/group/'+groupId)
-            .end((err, res={}) => {
+            .get(API_ROOT + '/group/' + groupId)
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 err ?
@@ -185,13 +185,13 @@ export function getGroup (groupId) {
     };
 }
 
-export function getGroupFailed () {
+export function getGroupFailed() {
     return {
         type: apiConstants.GET_GROUP_FAILED
     };
 }
 
-export function getGroupSucceeded (data) {
+export function getGroupSucceeded(data) {
     return {
         type: apiConstants.GET_GROUP_SUCCEEDED,
         data,
@@ -201,7 +201,7 @@ export function getGroupSucceeded (data) {
 
 // CREATE GROUP
 
-export function createGroup (data) {
+export function createGroup(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -214,7 +214,7 @@ export function createGroup (data) {
             .set(authConstants.AUTH_HEADER, token)
             .post(API_ROOT + '/group')
             .send(JSON.stringify(data))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 if (err) {
@@ -227,14 +227,14 @@ export function createGroup (data) {
     };
 }
 
-export function createGroupFailed (data) {
+export function createGroupFailed(data) {
     return {
         type: apiConstants.CREATE_GROUP_FAILED,
         data
     };
 }
 
-export function createGroupSucceeded (data) {
+export function createGroupSucceeded(data) {
     return {
         type: apiConstants.CREATE_GROUP_SUCCEEDED,
         data,
@@ -243,7 +243,7 @@ export function createGroupSucceeded (data) {
 
 // UPDATE GROUP
 
-export function updateGroup (data) {
+export function updateGroup(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -254,29 +254,29 @@ export function updateGroup (data) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .put(API_ROOT + '/group/'+data.id)
+            .put(API_ROOT + '/group/' + data.id)
             .send(JSON.stringify(data.model))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 if (err) {
                     dispatch(updateGroupFailed())
                 } else {
                     dispatch(updateGroupSucceeded(body));
-                    dispatch(updatePath('/group/'+data.id));
+                    dispatch(updatePath('/group/' + data.id));
                 }
             });
     };
 }
 
-export function updateGroupFailed (data) {
+export function updateGroupFailed(data) {
     return {
         type: apiConstants.UPDATE_GROUP_FAILED,
         data
     };
 }
 
-export function updateGroupSucceeded (data) {
+export function updateGroupSucceeded(data) {
     return {
         type: apiConstants.UPDATE_GROUP_SUCCEEDED,
         data,
@@ -285,7 +285,7 @@ export function updateGroupSucceeded (data) {
 
 // SURVEYS
 
-export function getGroupSurveys (groupId) {
+export function getGroupSurveys(groupId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -296,8 +296,8 @@ export function getGroupSurveys (groupId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/group/'+groupId+'/survey')
-            .end((err, res={}) => {
+            .get(API_ROOT + '/group/' + groupId + '/survey')
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 if (err) {
@@ -309,14 +309,14 @@ export function getGroupSurveys (groupId) {
     };
 }
 
-export function getGroupSurveysFailed (data) {
+export function getGroupSurveysFailed(data) {
     return {
         type: apiConstants.GET_GROUP_SURVEYS_FAILED,
         data
     };
 }
 
-export function getGroupSurveysSucceeded (data) {
+export function getGroupSurveysSucceeded(data) {
     return {
         type: apiConstants.GET_GROUP_SURVEYS_SUCCEEDED,
         data,
@@ -325,7 +325,7 @@ export function getGroupSurveysSucceeded (data) {
 
 // USERS
 
-export function getUsers (data) {
+export function getUsers(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -336,8 +336,8 @@ export function getUsers (data) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/user/'+data+'/user')
-            .end((err, res={}) => {
+            .get(API_ROOT + '/user/' + data + '/user')
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 if (err) {
@@ -349,14 +349,14 @@ export function getUsers (data) {
     };
 }
 
-export function getUsersFailed (data) {
+export function getUsersFailed(data) {
     return {
         type: apiConstants.GET_USERS_FAILED,
         data
     };
 }
 
-export function getUsersSucceeded (data) {
+export function getUsersSucceeded(data) {
     return {
         type: apiConstants.GET_USERS_SUCCEEDED,
         data,
@@ -365,7 +365,7 @@ export function getUsersSucceeded (data) {
 
 
 // CREATE SURVEY
-export function createSurvey (data) {
+export function createSurvey(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -378,27 +378,27 @@ export function createSurvey (data) {
             .set(authConstants.AUTH_HEADER, token)
             .post(API_ROOT + '/survey')
             .send(JSON.stringify(data))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 if (err) {
                     dispatch(createSurveyFailed())
                 } else {
                     dispatch(createSurveySucceeded(body));
-                    dispatch(updatePath('group/'+body.groupId+'/survey/'+body.id+'/add-questions'));
+                    dispatch(updatePath('group/' + body.groupId + '/survey/' + body.id + '/add-questions'));
                 }
             });
     };
 }
 
-export function createSurveyFailed (data) {
+export function createSurveyFailed(data) {
     return {
         type: apiConstants.CREATE_SURVEY_FAILED,
         data
     };
 }
 
-export function createSurveySucceeded (data) {
+export function createSurveySucceeded(data) {
     return {
         type: apiConstants.CREATE_SURVEY_SUCCEEDED,
         data,
@@ -407,7 +407,7 @@ export function createSurveySucceeded (data) {
 
 
 // GET SURVEY
-export function getSurvey (surveyId) {
+export function getSurvey(surveyId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -418,8 +418,8 @@ export function getSurvey (surveyId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/survey/'+surveyId)
-            .end((err, res={}) => {
+            .get(API_ROOT + '/survey/' + surveyId)
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(getSurveyFailed())
@@ -430,14 +430,54 @@ export function getSurvey (surveyId) {
     };
 }
 
-export function getSurveyFailed (data) {
+//ADD BRANCH QUESTION
+export function addBranchQuestion(data) {
+        var mainQuestionId = data.mainQuestionId;
+        var tempdata = { expected: data.responseId, branchQuestionId: data.branchId };
+        return dispatch => {
+            dispatch({
+                type: apiConstants.ADD_BRANCH_QUESTION,
+                data
+            });
+
+            return request
+                .put(API_ROOT + '/question/' + mainQuestionId + '/link')
+                .send(JSON.stringify(tempdata))
+                .end((err, res = {}) => {
+                    const { body } = res;
+
+                    if (err) {
+                        dispatch(addBranchQuestionFailed(body));
+                    } else {
+                        dispatch(addBranchQuestionSucceeded(body));
+                        dispatch(updatePath('/group/' + data.groupId + '/survey/' + data.surveyId));
+                    }
+                });
+        };
+}
+
+export function addBranchQuestionFailed(data) {
+    return {
+        type: apiConstants.ADD_BRANCH_QUESTION_FAILED,
+        data
+    };
+}
+
+export function addBranchQuestionSucceeded(data) {
+    return {
+        type: apiConstants.ADD_BRANCH_QUESTION_SUCCEEDED,
+        data
+    };
+}
+
+export function getSurveyFailed(data) {
     return {
         type: apiConstants.GET_SURVEY_FAILED,
         data
     };
 }
 
-export function getSurveySucceeded (data) {
+export function getSurveySucceeded(data) {
     return {
         type: apiConstants.GET_SURVEY_SUCCEEDED,
         data,
@@ -446,7 +486,7 @@ export function getSurveySucceeded (data) {
 
 
 // GET SURVEY QUESTIONS
-export function getSurveyQuestions (surveyId) {
+export function getSurveyQuestions(surveyId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -457,8 +497,8 @@ export function getSurveyQuestions (surveyId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/survey/'+surveyId+'/question')
-            .end((err, res={}) => {
+            .get(API_ROOT + '/survey/' + surveyId + '/question')
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(getSurveyQuestionsFailed())
@@ -469,14 +509,14 @@ export function getSurveyQuestions (surveyId) {
     };
 }
 
-export function getSurveyQuestionsFailed (data) {
+export function getSurveyQuestionsFailed(data) {
     return {
         type: apiConstants.GET_SURVEY_QUESTIONS_FAILED,
         data
     };
 }
 
-export function getSurveyQuestionsSucceeded (data) {
+export function getSurveyQuestionsSucceeded(data) {
     return {
         type: apiConstants.GET_SURVEY_QUESTIONS_SUCCEEDED,
         data,
@@ -484,7 +524,7 @@ export function getSurveyQuestionsSucceeded (data) {
 }
 
 // GET SURVEY RESPONSES
-export function getSurveyResponses (surveyId) {
+export function getSurveyResponses(surveyId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -495,8 +535,8 @@ export function getSurveyResponses (surveyId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/survey/'+surveyId+'/response')
-            .end((err, res={}) => {
+            .get(API_ROOT + '/survey/' + surveyId + '/response')
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(getSurveyResponsesFailed())
@@ -507,14 +547,14 @@ export function getSurveyResponses (surveyId) {
     };
 }
 
-export function getSurveyResponsesFailed (data) {
+export function getSurveyResponsesFailed(data) {
     return {
         type: apiConstants.GET_SURVEY_RESPONSES_FAILED,
         data
     };
 }
 
-export function getSurveyResponsesSucceeded (data) {
+export function getSurveyResponsesSucceeded(data) {
     return {
         type: apiConstants.GET_SURVEY_RESPONSES_SUCCEEDED,
         data,
@@ -523,7 +563,7 @@ export function getSurveyResponsesSucceeded (data) {
 
 
 // ADD SURVEY QUESTION
-export function addSurveyQuestion (data) {
+export function addSurveyQuestion(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -536,7 +576,7 @@ export function addSurveyQuestion (data) {
             .set(authConstants.AUTH_HEADER, token)
             .post(API_ROOT + '/question')
             .send(JSON.stringify(data))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(addSurveyQuestionFailed())
@@ -547,14 +587,14 @@ export function addSurveyQuestion (data) {
     };
 }
 
-export function addSurveyQuestionFailed (data) {
+export function addSurveyQuestionFailed(data) {
     return {
         type: apiConstants.ADD_SURVEY_QUESTION_FAILED,
         data
     };
 }
 
-export function addSurveyQuestionSucceeded (data) {
+export function addSurveyQuestionSucceeded(data) {
     return {
         type: apiConstants.ADD_SURVEY_QUESTION_SUCCEEDED,
         data,
@@ -563,7 +603,7 @@ export function addSurveyQuestionSucceeded (data) {
 
 
 // GET SURVEY USERS
-export function getSurveyUsers (surveyId) {
+export function getSurveyUsers(surveyId) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -574,8 +614,8 @@ export function getSurveyUsers (surveyId) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .get(API_ROOT + '/survey/'+surveyId+'/user')
-            .end((err, res={}) => {
+            .get(API_ROOT + '/survey/' + surveyId + '/user')
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(getSurveyUsersFailed())
@@ -586,14 +626,14 @@ export function getSurveyUsers (surveyId) {
     };
 }
 
-export function getSurveyUsersFailed (data) {
+export function getSurveyUsersFailed(data) {
     return {
         type: apiConstants.GET_SURVEY_USERS_FAILED,
         data
     };
 }
 
-export function getSurveyUsersSucceeded (data) {
+export function getSurveyUsersSucceeded(data) {
     return {
         type: apiConstants.GET_SURVEY_USERS_SUCCEEDED,
         data,
@@ -602,7 +642,7 @@ export function getSurveyUsersSucceeded (data) {
 
 
 // ADD SURVEY USER
-export function addSurveyUser (data) {
+export function addSurveyUser(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -613,9 +653,9 @@ export function addSurveyUser (data) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .put(API_ROOT + '/survey/'+data.surveyId+'/user')
+            .put(API_ROOT + '/survey/' + data.surveyId + '/user')
             .send(JSON.stringify(data.data))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(addSurveyUserFailed())
@@ -626,14 +666,14 @@ export function addSurveyUser (data) {
     };
 }
 
-export function addSurveyUserFailed (data) {
+export function addSurveyUserFailed(data) {
     return {
         type: apiConstants.ADD_SURVEY_USER_FAILED,
         data
     };
 }
 
-export function addSurveyUserSucceeded (data) {
+export function addSurveyUserSucceeded(data) {
     return {
         type: apiConstants.ADD_SURVEY_USER_SUCCEEDED,
         data,
@@ -642,7 +682,7 @@ export function addSurveyUserSucceeded (data) {
 
 
 // CREATE USER
-export function createUser (isResearcher, data, whenDone) {
+export function createUser(isResearcher, data, whenDone) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     let apiUrl = '/auth/register/client';
@@ -660,10 +700,11 @@ export function createUser (isResearcher, data, whenDone) {
             .set(authConstants.AUTH_HEADER, token)
             .post(API_ROOT + apiUrl)
             .send(JSON.stringify(data))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
                 if (err) {
                     dispatch(createUserFailed(body))
+
                 } else {
                     dispatch(createUserSucceeded(body));
                     dispatch(updatePath('/users'));
@@ -673,14 +714,14 @@ export function createUser (isResearcher, data, whenDone) {
     };
 }
 
-export function createUserFailed (data) {
+export function createUserFailed(data) {
     return {
         type: apiConstants.CREATE_USER_FAILED,
         data
     };
 }
 
-export function createUserSucceeded (data) {
+export function createUserSucceeded(data) {
     return {
         type: apiConstants.CREATE_USER_SUCCEEDED,
         data,
@@ -690,7 +731,7 @@ export function createUserSucceeded (data) {
 
 // UPDATE SURVEY
 
-export function updateSurvey (data) {
+export function updateSurvey(data) {
     const token = Cookie.get(authConstants.AUTH_COOKIE);
 
     return dispatch => {
@@ -701,29 +742,29 @@ export function updateSurvey (data) {
 
         return request
             .set(authConstants.AUTH_HEADER, token)
-            .put(API_ROOT + '/survey/'+data.surveyId)
+            .put(API_ROOT + '/survey/' + data.surveyId)
             .send(JSON.stringify(data.model))
-            .end((err, res={}) => {
+            .end((err, res = {}) => {
                 const { body } = res;
 
                 if (err) {
                     dispatch(createGroupFailed())
                 } else {
                     dispatch(createGroupSucceeded(body));
-                    dispatch(updatePath('/group/'+data.groupId));
+                    dispatch(updatePath('/group/' + data.groupId));
                 }
             });
     };
 }
 
-export function updateSurveyFailed (data) {
+export function updateSurveyFailed(data) {
     return {
         type: apiConstants.UPDATE_SURVEY_FAILED,
         data
     };
 }
 
-export function updateSurveySucceeded (data) {
+export function updateSurveySucceeded(data) {
     return {
         type: apiConstants.UPDATE_SURVEY_SUCCEEDED,
         data,

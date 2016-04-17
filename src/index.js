@@ -28,10 +28,11 @@ import UsersContainer from './containers/UsersContainer';
 import UpdateGroupContainer from './containers/UpdateGroupContainer';
 import UpdateSurveyContainer from './containers/UpdateSurveyContainer';
 import CreateUserContainer from './containers/CreateUserContainer';
-import NotFound from './containers/NotFound'
+import AddBranchingQuestionContainer from './containers/AddBranchingQuestionContainer';
+import NotFound from './containers/NotFound';
 
 import thunkMiddleware from 'redux-thunk';
-import createBrowserHistory from 'history/lib/createBrowserHistory'
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import {reducer as formReducer} from 'redux-form';
 
 const reducer = combineReducers(Object.assign({}, reducers, {
@@ -74,8 +75,10 @@ class Root extends Component {
                             <Route path="group/:id/update" component={UpdateGroupContainer} />
                             <Route path='users/create' component={CreateUserContainer} />
                             <Route path='users' component={UsersContainer} />
+                            <Route path="group/:groupId/survey/:surveyId/question/:questionId" component={AddBranchingQuestionContainer} />    
                         </Route>
                         <Route path="*" component={NotFound}/>
+                        
                     </Router>
                 </Provider>
                 <DebugPanel top right bottom>

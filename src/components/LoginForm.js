@@ -47,7 +47,7 @@ export default class LoginFormComponent extends Component {
                     margin: '100px auto',
                     width: 500
                 }}>
-                <h1>Admin - Login</h1>
+                <h1>Please Log In</h1>
                 <Panel>
                     <form onSubmit={this.handleFormSubmit}>
                         <Input type='text'

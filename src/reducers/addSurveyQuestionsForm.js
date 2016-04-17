@@ -4,6 +4,7 @@ const initialState = {
     title: '',
     responses: [],
     responseTitle: '',
+    isBranchQuestion:'',
     isLoading: false,
 }
 
@@ -27,7 +28,8 @@ export default function addSurveyQuestionsForm (state = initialState, action = {
         case APIEvents.ADD_SURVEY_QUESTION_FAILED:
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                 error: "Please enter all fields"
             };
 
         default:
