@@ -24,17 +24,18 @@ function select(state) {
 }
 
 class ViewSurveyPage extends Component {
+    
     componentWillMount () {
         this.props.getGroup(this.props.groupId);
         this.props.getSurvey(this.props.surveyId);
     }
 
     render (){
-        const { createSurveyForm, group, survey, dispatch, surveyId } = this.props;
+        const { createSurveyForm, group, groupId, survey, dispatch, surveyId } = this.props;
 
-        if (group.isLoading) {
-            return (<span>Loading...</span>);
-        }
+        // if (group.isLoading) {
+        //     return (<span>Loading...</span>);
+        // }
 
         return (
             <Panel>
@@ -80,6 +81,8 @@ class ViewSurveyPage extends Component {
                 <SurveyQuestionsList
                     surveyId={surveyId}
                     survey={survey}
+                    groupId={groupId}
+                    group={group}
                     {...bindActionCreators(actionCreators, dispatch)} />
                 <h2>Responses</h2>
                 <SurveyResponsesList

@@ -29,7 +29,8 @@ class AddSurveyQuestionsPage extends Component {
             group,
             survey,
             dispatch,
-            surveyId
+            surveyId,
+            groupId
         } = this.props;
 
         if (group.isLoading || survey.isLoading) {
@@ -59,6 +60,8 @@ class AddSurveyQuestionsPage extends Component {
                 <SurveyQuestionsList
                     surveyId={surveyId}
                     survey={survey}
+                    groupId={groupId}
+                    group={group}
                     {...bindActionCreators(actionCreators, dispatch)} />
                 <h2>Add Questions</h2>
                 <SurveyQuestionsForm

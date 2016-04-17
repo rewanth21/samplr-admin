@@ -33,6 +33,7 @@ export default class CreateGroupForm extends Component {
     }
 
     saveList (values) {
+        console.log("values::",values);
         this.props.createSurveyForm.schedule = _.map(values, (x) => {
             return {
                 time: x
@@ -42,13 +43,6 @@ export default class CreateGroupForm extends Component {
 
     render() {
         const { createSurveyForm: { name, isLoading } } = this.props;
-
-        let scheduleCheckboxes = [];
-        ENUMS.SURVEY_TIMES.forEach((time, index) => {
-            scheduleCheckboxes.push(
-                (<Input key={index} type="checkbox" ref="schedule" label={time.label} />)
-            );
-        });
 
         return (
             <form onSubmit={this.handleFormSubmit}>
