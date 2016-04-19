@@ -30,9 +30,9 @@ class SurveyQuestionsForm extends Component {
 
         let responses = [];
 
-        if (this.props.fields.responses.length == 0 && this.props.fields.questionType.value == "slider") {
+        if (this.props.fields.questionType.value == "slider") {
             responses.push({
-                value: "0",
+                value: "1",
                 text: "less than 5"
             })
 
